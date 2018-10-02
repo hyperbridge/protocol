@@ -1,13 +1,34 @@
 {
     "name": "marketplace-protocol",
+    "description": "Marketplace Protocol",
     "version": "0.1.0",
     "repository": "git@github.com:hyperbridge/marketplace-protocol.git",
     "license": "SEE LICENSE IN LICENSE.md",
     "main": "./index.js",
-    "scripts": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "client": "cd test-client && node server.js",
+        "build-api": "rm -rf build && mkdir build && cp -R communication-api/ build/communication-api/ && ./node_modules/.bin/babel communication-api --out-dir build/communication-api",
+        "build": "cd smart-contracts/ethereum && truffle compile",
+        "format": "yarn run prettier --write 'test-client/**/*.js'"
+    },
     "dependencies": {},
     "engines": {
         "node": "8.11.1"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "@babel/cli": "^7.1.0",
+        "@babel/core": "^7.1.0",
+        "@babel/polyfill": "^7.0.0",
+        "@babel/plugin-proposal-export-default-from": "^7.0.0",
+        "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+        "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+        "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+        "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+        "@babel/plugin-transform-async-to-generator": "^7.1.0",
+        "@babel/preset-env": "^7.0.0",
+        "@babel/preset-stage-1": "^7.0.0",
+        "@babel/register": "^7.0.0"
+    }
 }
