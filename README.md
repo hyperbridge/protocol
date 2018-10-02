@@ -17,16 +17,15 @@ This is the marketplace protocol specification for the Hyperbridge ecosystem, bu
 
 ## Quick Links
 
-- [Site](http://hyperbridge.org/)
+- 🌐 [Site](http://hyperbridge.org/)
 - 📖 [Docs](http://docs.hyperbridge.org/funding-protocol)
-- [EIPs](https://github.com/hyperbridge/EIPs)
-- [Web Client](https://github.com/hyperbridge/blockhub-web-client)
-- [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
-- [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
-- [Token](https://github.com/hyperbridge/token)
-- [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
-- [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
-
+- 📓 [EIPs](https://github.com/hyperbridge/EIPs)
+- 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
+- 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
+- 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
+- 🔗 [Token](https://github.com/hyperbridge/token)
+- 🔗 [Funding Protocol](https://github.com/hyperbridge/funding-protocol)
+- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/marketplace-protocol)
 
 ## Intro
 
