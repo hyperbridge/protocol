@@ -12,7 +12,9 @@
         "build": "cd smart-contracts/ethereum && truffle compile",
         "format": "yarn run prettier --write 'test-client/**/*.js'"
     },
-    "dependencies": {},
+    "dependencies": {
+        "truffle-contract": "^3.0.5"
+    },
     "engines": {
         "node": "8.11.1"
     },
