@@ -1,5 +1,5 @@
 {
-  "name": "funding-protocol",
+  "name": "hyperbridge-funding-protocol",
   "version": "1.0.0",
   "description": "Funding Protocol",
   "main": "./index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hyperbridge/funding-protocol.git"
+    "url": "git+https://github.com/hyperbridge/protocol.git"
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "engines": {
