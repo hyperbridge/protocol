@@ -1,0 +1,27 @@
+{
+  "name": "ethereum",
+  "version": "1.0.0",
+  "description": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "truffle": "./node_modules/.bin/truffle",
+    "ganache": "ganache-cli --mnemonic \"candy maple cake sugar pudding cream honey rich smooth crumble sweet treat\"",
+    "test": "npm run truffle test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "dependencies": {
+    "openzeppelin-solidity": "1.10.0"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.1.6",
+    "truffle": "^4.1.11",
+    "truffle-hdwallet-provider": "0.0.6",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2"
+  }
+}
