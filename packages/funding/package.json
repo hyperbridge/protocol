@@ -1,0 +1,48 @@
+{
+  "name": "funding-protocol",
+  "version": "1.0.0",
+  "description": "Funding Protocol",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd test-client && node server.js",
+    "build-api": "rm -rf build && mkdir build && cp -R communication-api/ build/communication-api/ && ./node_modules/.bin/babel communication-api --out-dir build/communication-api",
+    "build": "cd smart-contracts/ethereum && truffle compile",
+    "format": "yarn run prettier --write 'test-client/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyperbridge/funding-protocol.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "engines": {
+    "node": "~8.11.1"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.0",
+    "solc": "^0.4.23",
+    "truffle-contract": "^3.0.5",
+    "truffle-hdwallet-provider": "0.0.6",
+    "web3": "^1.0.0-beta.26"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-stage-1": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
+    "babel-plugin-transform-es3-property-literals": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "prettier": "1.14.2"
+  }
+}
