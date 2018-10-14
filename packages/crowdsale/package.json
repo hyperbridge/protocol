@@ -33,5 +33,6 @@
     "babel-preset-stage-2": "^6.18.0",
     "babel-preset-stage-3": "^6.17.0",
     "babel-register": "^6.23.0"
-  }
+  },
+  "gitHead": "a8a1e4aeb43fd632e886fdfc59f217f6a2d0da7b"
 }

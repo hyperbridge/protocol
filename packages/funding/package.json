@@ -44,5 +44,6 @@
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "eslint-plugin-prettier": "^2.6.0",
     "prettier": "1.14.2"
-  }
+  },
+  "gitHead": "a8a1e4aeb43fd632e886fdfc59f217f6a2d0da7b"
 }

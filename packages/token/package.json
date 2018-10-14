@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-token",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description": "Hyperbridge Token",
   "main": "./index.js",
   "scripts": {
@@ -31,5 +31,6 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2"
-  }
+  },
+  "gitHead": "a8a1e4aeb43fd632e886fdfc59f217f6a2d0da7b"
 }
