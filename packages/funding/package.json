@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-funding-protocol",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "Hyperbridge Funding Protocol",
   "main": "./index.js",
   "scripts": {
@@ -28,7 +28,6 @@
   "devDependencies": {
     "@babel/cli": "^7.1.0",
     "@babel/core": "^7.1.0",
-    "@babel/polyfill": "^7.0.0",
     "@babel/plugin-proposal-export-default-from": "^7.0.0",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
@@ -36,6 +35,7 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-stage-1": "^7.0.0",
     "@babel/register": "^7.0.0",

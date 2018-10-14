@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-crowdsale",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "description": "",
   "main": "truffle-config.js",
   "directories": {
