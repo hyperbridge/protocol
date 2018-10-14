@@ -1,0 +1,16 @@
+{
+    "package_name": "marketplace-protocol",
+    "version": "0.0.1",
+    "description": "Contracts for Marketplace Protocol",
+    "authors": [
+        "Eric Muyser <eric@muyser.com>"
+    ],
+    "keywords": [
+        "ethereum",
+        "hyperbridge"
+    ],
+    "dependencies": {
+        "owned": "^0.0.1"
+    },
+    "license": "SEE LICENSE IN LICENSE.md"
+}
