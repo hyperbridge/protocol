@@ -1,7 +1,7 @@
 {
   "name": "hyperbridge-funding-protocol",
   "version": "1.0.0",
-  "description": "Funding Protocol",
+  "description": "Hyperbridge Funding Protocol",
   "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

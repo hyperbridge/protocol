@@ -1,8 +1,8 @@
 {
-    "name": "marketplace-protocol",
-    "description": "Marketplace Protocol",
+    "name": "hyperbridge-marketplace-protocol",
+    "description": "Hyperbridge Marketplace Protocol",
     "version": "0.1.0",
-    "repository": "git@github.com:hyperbridge/marketplace-protocol.git",
+    "repository": "git@github.com:hyperbridge/protocol.git",
     "license": "SEE LICENSE IN LICENSE.md",
     "main": "./index.js",
     "scripts": {
