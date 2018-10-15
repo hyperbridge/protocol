@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-crowdsale",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "truffle-config.js",
   "directories": {
@@ -24,7 +24,7 @@
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2",
-    "hyperbridge-token": "^1.0.4",
+    "hyperbridge-token": "^1.0.6",
     "openzeppelin-solidity": "1.10.0"
   },
   "devDependencies": {
