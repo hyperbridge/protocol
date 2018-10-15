@@ -17,17 +17,41 @@ export let state = {
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/EternalStorage.json'),
             address: null
         },
+        TokenLib: {
+            contract: null,
+            deployed: null,
+            meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/TokenLib.json'),
+            address: null,
+            links: [
+                {
+                    name: 'EternalStorage', address: null
+                }
+            ]
+        },
         Token: {
             contract: null,
             deployed: null,
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Token.json'),
-            address: null
+            address: null,
+            links: [
+                {
+                    name: 'EternalStorage', address: null
+                }
+            ]
         },
         TokenDelegate: {
             contract: null,
             deployed: null,
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/TokenDelegate.json'),
-            address: null
+            address: null,
+            links: [
+                {
+                    name: 'EternalStorage', address: null
+                },
+                {
+                    name: 'TokenLib', address: null
+                }
+            ]
         }
     }
 }
