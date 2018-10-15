@@ -375,9 +375,9 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.24;\n\nimport \"openzeppelin-solidity/contracts/ownership/Ownable.sol\";\nimport \"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\";\n\ncontract UpgradableToken is ERC20, Ownable {\n  address public predecessor;\n  address public successor;\n  string public version;\n\n  event UpgradedTo(address indexed successor);\n  event UpgradedFrom(address indexed predecessor);\n\n  modifier unlessUpgraded() {\n    require (msg.sender == successor || successor == address(0));\n    _;\n  }\n\n  modifier isUpgraded() {\n    require (successor != address(0));\n    _;\n  }\n\n  modifier hasPredecessor() {\n    require (predecessor != address(0));\n    _;\n  }\n\n  function isDeprecated() public view returns (bool) {\n    return successor != address(0);\n  }\n\n  constructor(string _version) public {\n      version = _version;\n  }\n\n  function upgradeTo(address _successor) public onlyOwner unlessUpgraded returns (bool){\n    require(_successor != address(0));\n\n    uint remainingContractBalance = balanceOf(this);\n\n    if (remainingContractBalance > 0) {\n      this.transfer(_successor, remainingContractBalance);\n    }\n    successor = _successor;\n    emit UpgradedTo(_successor);\n    return true;\n  }\n\n  function upgradedFrom(address _predecessor) public onlyOwner returns (bool) {\n    require(_predecessor != address(0));\n\n    predecessor = _predecessor;\n\n    emit UpgradedFrom(_predecessor);\n\n    return true;\n  }\n}\n",
-  "sourcePath": "/ude/hb/projects/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
+  "sourcePath": "/ude/hb/projects/protocol/packages/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
   "ast": {
-    "absolutePath": "/ude/hb/projects/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
     "exportedSymbols": {
       "UpgradableToken": [
         1506
@@ -2448,7 +2448,7 @@
     "src": "0:1405:6"
   },
   "legacyAST": {
-    "absolutePath": "/ude/hb/projects/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/token/smart-contracts/ethereum/contracts/UpgradableToken.sol",
     "exportedSymbols": {
       "UpgradableToken": [
         1506
@@ -4523,6 +4523,6 @@
     "version": "0.4.24+commit.e67f0147.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "2.0.0",
-  "updatedAt": "2018-08-17T02:25:36.397Z"
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-15T04:45:03.702Z"
 }

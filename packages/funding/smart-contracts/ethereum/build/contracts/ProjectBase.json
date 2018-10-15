@@ -2,6 +2,20 @@
   "contractName": "ProjectBase",
   "abi": [
     {
+      "constant": true,
+      "inputs": [],
+      "name": "fundingStorage",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -20,20 +34,20 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.24;\n\nimport \"../libraries/storage/ProjectStorageAccess.sol\";\nimport \"../libraries/storage/DeveloperStorageAccess.sol\";\nimport \"../Testable.sol\";\n\ncontract ProjectBase is Testable {\n\n    using ProjectStorageAccess for address;\n    using DeveloperStorageAccess for address;\n\n    modifier onlyProjectDeveloper(uint _projectId) {\n        require(msg.sender == fundingStorage.getProjectDeveloper(_projectId), \"You must be the project developer to perform this action.\");\n        _;\n    }\n\n    modifier onlyDraftProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Draft, \"This action can only be performed on a draft project.\");\n        _;\n    }\n\n    modifier onlyPendingProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Pending, \"This action can only be performed on a pending project.\");\n        _;\n    }\n\n    modifier onlyContributableProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Contributable, \"This action can only be performed on a contributable project.\");\n        _;\n    }\n\n    modifier onlyInDevelopmentProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.InDevelopment, \"This action can only be performed on a project in development.\");\n        _;\n    }\n\n    modifier onlyRefundableProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Refundable, \"This action can only be performed on a refundable project.\");\n        _;\n    }\n\n    enum Status {Inactive, Draft, Pending, Contributable, InDevelopment, Refundable, Rejected}\n\n    address fundingStorage;\n}\n",
-  "sourcePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"../libraries/storage/ProjectStorageAccess.sol\";\nimport \"../libraries/storage/DeveloperStorageAccess.sol\";\nimport \"../Testable.sol\";\n\ncontract ProjectBase is Testable {\n\n    using ProjectStorageAccess for FundingStorage;\n    using DeveloperStorageAccess for FundingStorage;\n\n    modifier onlyProjectDeveloper(uint _projectId) {\n        require(msg.sender == fundingStorage.getProjectDeveloper(_projectId), \"You must be the project developer to perform this action.\");\n        _;\n    }\n\n    modifier onlyDraftProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Draft, \"This action can only be performed on a draft project.\");\n        _;\n    }\n\n    modifier onlyPendingProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Pending, \"This action can only be performed on a pending project.\");\n        _;\n    }\n\n    modifier onlyContributableProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Contributable, \"This action can only be performed on a contributable project.\");\n        _;\n    }\n\n    modifier onlyInDevelopmentProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.InDevelopment, \"This action can only be performed on a project in development.\");\n        _;\n    }\n\n    modifier onlyRefundableProject(uint _projectId) {\n        require(Status(fundingStorage.getProjectStatus(_projectId)) == Status.Refundable, \"This action can only be performed on a refundable project.\");\n        _;\n    }\n\n    enum Status {Inactive, Draft, Pending, Contributable, InDevelopment, Refundable, Rejected}\n\n    FundingStorage public fundingStorage;\n}\n",
+  "sourcePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
   "ast": {
-    "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
     "exportedSymbols": {
       "ProjectBase": [
-        8127
+        8953
       ]
     },
-    "id": 8128,
+    "id": 8954,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 7993,
+        "id": 8819,
         "literals": [
           "solidity",
           "^",
@@ -41,38 +55,38 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:17"
+        "src": "0:24:22"
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
         "file": "../libraries/storage/ProjectStorageAccess.sol",
-        "id": 7994,
+        "id": 8820,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 7771,
-        "src": "26:55:17",
+        "scope": 8954,
+        "sourceUnit": 8469,
+        "src": "26:55:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/DeveloperStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/DeveloperStorageAccess.sol",
         "file": "../libraries/storage/DeveloperStorageAccess.sol",
-        "id": 7995,
+        "id": 8821,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 2819,
-        "src": "82:57:17",
+        "scope": 8954,
+        "sourceUnit": 3862,
+        "src": "82:57:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/Testable.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/Testable.sol",
         "file": "../Testable.sol",
-        "id": 7996,
+        "id": 8822,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 749,
-        "src": "140:25:17",
+        "scope": 8954,
+        "sourceUnit": 1754,
+        "src": "140:25:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -82,94 +96,98 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 7997,
+              "id": 8823,
               "name": "Testable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 748,
-              "src": "191:8:17",
+              "referencedDeclaration": 1753,
+              "src": "191:8:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Testable_$748",
+                "typeIdentifier": "t_contract$_Testable_$1753",
                 "typeString": "contract Testable"
               }
             },
-            "id": 7998,
+            "id": 8824,
             "nodeType": "InheritanceSpecifier",
-            "src": "191:8:17"
+            "src": "191:8:22"
           }
         ],
         "contractDependencies": [
-          748
+          1753
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 8127,
+        "id": 8953,
         "linearizedBaseContracts": [
-          8127,
-          748
+          8953,
+          1753
         ],
         "name": "ProjectBase",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 8001,
+            "id": 8827,
             "libraryName": {
               "contractScope": null,
-              "id": 7999,
+              "id": 8825,
               "name": "ProjectStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7770,
-              "src": "213:20:17",
+              "referencedDeclaration": 8468,
+              "src": "213:20:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ProjectStorageAccess_$7770",
+                "typeIdentifier": "t_contract$_ProjectStorageAccess_$8468",
                 "typeString": "library ProjectStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "207:39:17",
+            "src": "207:46:22",
             "typeName": {
-              "id": 8000,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "238:7:17",
+              "contractScope": null,
+              "id": 8826,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "238:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
-            "id": 8004,
+            "id": 8830,
             "libraryName": {
               "contractScope": null,
-              "id": 8002,
+              "id": 8828,
               "name": "DeveloperStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2818,
-              "src": "257:22:17",
+              "referencedDeclaration": 3861,
+              "src": "264:22:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_DeveloperStorageAccess_$2818",
+                "typeIdentifier": "t_contract$_DeveloperStorageAccess_$3861",
                 "typeString": "library DeveloperStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "251:41:17",
+            "src": "258:48:22",
             "typeName": {
-              "id": 8003,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "284:7:17",
+              "contractScope": null,
+              "id": 8829,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "291:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
             "body": {
-              "id": 8020,
+              "id": 8846,
               "nodeType": "Block",
-              "src": "345:158:17",
+              "src": "359:158:22",
               "statements": [
                 {
                   "expression": {
@@ -181,7 +199,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8015,
+                        "id": 8841,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -190,18 +208,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8009,
+                            "id": 8835,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9342,
-                            "src": "363:3:17",
+                            "referencedDeclaration": 11097,
+                            "src": "377:3:22",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 8010,
+                          "id": 8836,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -209,7 +227,7 @@
                           "memberName": "sender",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "363:10:17",
+                          "src": "377:10:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -222,12 +240,12 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 8013,
+                              "id": 8839,
                               "name": "_projectId",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 8006,
-                              "src": "412:10:17",
+                              "referencedDeclaration": 8832,
+                              "src": "426:10:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -243,32 +261,32 @@
                             ],
                             "expression": {
                               "argumentTypes": null,
-                              "id": 8011,
+                              "id": 8837,
                               "name": "fundingStorage",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 8126,
-                              "src": "377:14:17",
+                              "referencedDeclaration": 8952,
+                              "src": "391:14:22",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_address",
-                                "typeString": "address"
+                                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                "typeString": "contract FundingStorage"
                               }
                             },
-                            "id": 8012,
+                            "id": 8838,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "getProjectDeveloper",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3027,
-                            "src": "377:34:17",
+                            "referencedDeclaration": 4062,
+                            "src": "391:34:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_address_$bound_to$_t_address_$",
-                              "typeString": "function (address,uint256) view returns (address)"
+                              "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                              "typeString": "function (contract FundingStorage,uint256) view returns (address)"
                             }
                           },
-                          "id": 8014,
+                          "id": 8840,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -276,13 +294,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "377:46:17",
+                          "src": "391:46:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "363:60:17",
+                        "src": "377:60:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -291,14 +309,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "596f75206d757374206265207468652070726f6a65637420646576656c6f70657220746f20706572666f726d207468697320616374696f6e2e",
-                        "id": 8016,
+                        "id": 8842,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "425:59:17",
+                        "src": "439:59:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_97e9ca7532691841f16fb5e7eaebc3c94d5e0b17b2102ce773f5719855267386",
@@ -318,21 +336,21 @@
                           "typeString": "literal_string \"You must be the project developer to perform this action.\""
                         }
                       ],
-                      "id": 8008,
+                      "id": 8834,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "355:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "369:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8017,
+                    "id": 8843,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -340,38 +358,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "355:130:17",
+                    "src": "369:130:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8018,
+                  "id": 8844,
                   "nodeType": "ExpressionStatement",
-                  "src": "355:130:17"
+                  "src": "369:130:22"
                 },
                 {
-                  "id": 8019,
+                  "id": 8845,
                   "nodeType": "PlaceholderStatement",
-                  "src": "495:1:17"
+                  "src": "509:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8021,
+            "id": 8847,
             "name": "onlyProjectDeveloper",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8007,
+              "id": 8833,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8006,
+                  "id": 8832,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8021,
-                  "src": "328:15:17",
+                  "scope": 8847,
+                  "src": "342:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -379,10 +397,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8005,
+                    "id": 8831,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "328:4:17",
+                    "src": "342:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -392,16 +410,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "327:17:17"
+              "src": "341:17:22"
             },
-            "src": "298:205:17",
+            "src": "312:205:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8039,
+              "id": 8865,
               "nodeType": "Block",
-              "src": "552:161:17",
+              "src": "566:161:22",
               "statements": [
                 {
                   "expression": {
@@ -410,10 +428,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8034,
+                        "id": 8860,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -426,12 +444,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8029,
+                                  "id": 8855,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8023,
-                                  "src": "609:10:17",
+                                  "referencedDeclaration": 8849,
+                                  "src": "623:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -447,32 +465,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8027,
+                                  "id": 8853,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "577:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "591:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8028,
+                                "id": 8854,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "577:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "591:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8030,
+                              "id": 8856,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -480,7 +498,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "577:43:17",
+                              "src": "591:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -494,18 +512,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8026,
+                            "id": 8852,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "570:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "584:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8031,
+                          "id": 8857,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -513,9 +531,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "570:51:17",
+                          "src": "584:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -525,18 +543,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8032,
+                            "id": 8858,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "625:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "639:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8033,
+                          "id": 8859,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -544,13 +562,13 @@
                           "memberName": "Draft",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "625:12:17",
+                          "src": "639:12:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "570:67:17",
+                        "src": "584:67:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -559,14 +577,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612064726166742070726f6a6563742e",
-                        "id": 8035,
+                        "id": 8861,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "639:55:17",
+                        "src": "653:55:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_6a8905144cdbba6a872b48030baf252db3df82ccda3b68788f1dfa18dc72a6ad",
@@ -586,21 +604,21 @@
                           "typeString": "literal_string \"This action can only be performed on a draft project.\""
                         }
                       ],
-                      "id": 8025,
+                      "id": 8851,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "562:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "576:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8036,
+                    "id": 8862,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -608,38 +626,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "562:133:17",
+                    "src": "576:133:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8037,
+                  "id": 8863,
                   "nodeType": "ExpressionStatement",
-                  "src": "562:133:17"
+                  "src": "576:133:22"
                 },
                 {
-                  "id": 8038,
+                  "id": 8864,
                   "nodeType": "PlaceholderStatement",
-                  "src": "705:1:17"
+                  "src": "719:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8040,
+            "id": 8866,
             "name": "onlyDraftProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8024,
+              "id": 8850,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8023,
+                  "id": 8849,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8040,
-                  "src": "535:15:17",
+                  "scope": 8866,
+                  "src": "549:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -647,10 +665,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8022,
+                    "id": 8848,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "535:4:17",
+                    "src": "549:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -660,16 +678,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "534:17:17"
+              "src": "548:17:22"
             },
-            "src": "509:204:17",
+            "src": "523:204:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8058,
+              "id": 8884,
               "nodeType": "Block",
-              "src": "764:165:17",
+              "src": "778:165:22",
               "statements": [
                 {
                   "expression": {
@@ -678,10 +696,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8053,
+                        "id": 8879,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -694,12 +712,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8048,
+                                  "id": 8874,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8042,
-                                  "src": "821:10:17",
+                                  "referencedDeclaration": 8868,
+                                  "src": "835:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -715,32 +733,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8046,
+                                  "id": 8872,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "789:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "803:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8047,
+                                "id": 8873,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "789:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "803:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8049,
+                              "id": 8875,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -748,7 +766,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "789:43:17",
+                              "src": "803:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -762,18 +780,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8045,
+                            "id": 8871,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "782:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "796:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8050,
+                          "id": 8876,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -781,9 +799,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "782:51:17",
+                          "src": "796:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -793,18 +811,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8051,
+                            "id": 8877,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "837:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "851:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8052,
+                          "id": 8878,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -812,13 +830,13 @@
                           "memberName": "Pending",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "837:14:17",
+                          "src": "851:14:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "782:69:17",
+                        "src": "796:69:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -827,14 +845,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612070656e64696e672070726f6a6563742e",
-                        "id": 8054,
+                        "id": 8880,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "853:57:17",
+                        "src": "867:57:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_a7f98f21e78edef5113e0f374e4395642d4d57ec102f5ce2506a27df5861b870",
@@ -854,21 +872,21 @@
                           "typeString": "literal_string \"This action can only be performed on a pending project.\""
                         }
                       ],
-                      "id": 8044,
+                      "id": 8870,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "774:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "788:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8055,
+                    "id": 8881,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -876,38 +894,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "774:137:17",
+                    "src": "788:137:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8056,
+                  "id": 8882,
                   "nodeType": "ExpressionStatement",
-                  "src": "774:137:17"
+                  "src": "788:137:22"
                 },
                 {
-                  "id": 8057,
+                  "id": 8883,
                   "nodeType": "PlaceholderStatement",
-                  "src": "921:1:17"
+                  "src": "935:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8059,
+            "id": 8885,
             "name": "onlyPendingProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8043,
+              "id": 8869,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8042,
+                  "id": 8868,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8059,
-                  "src": "747:15:17",
+                  "scope": 8885,
+                  "src": "761:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -915,10 +933,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8041,
+                    "id": 8867,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "747:4:17",
+                    "src": "761:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -928,16 +946,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "746:17:17"
+              "src": "760:17:22"
             },
-            "src": "719:210:17",
+            "src": "733:210:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8077,
+              "id": 8903,
               "nodeType": "Block",
-              "src": "986:177:17",
+              "src": "1000:177:22",
               "statements": [
                 {
                   "expression": {
@@ -946,10 +964,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8072,
+                        "id": 8898,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -962,12 +980,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8067,
+                                  "id": 8893,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8061,
-                                  "src": "1043:10:17",
+                                  "referencedDeclaration": 8887,
+                                  "src": "1057:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -983,32 +1001,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8065,
+                                  "id": 8891,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1011:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1025:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8066,
+                                "id": 8892,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1011:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1025:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8068,
+                              "id": 8894,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1016,7 +1034,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1011:43:17",
+                              "src": "1025:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -1030,18 +1048,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8064,
+                            "id": 8890,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1004:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1018:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8069,
+                          "id": 8895,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1049,9 +1067,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1004:51:17",
+                          "src": "1018:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -1061,18 +1079,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8070,
+                            "id": 8896,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1059:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1073:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8071,
+                          "id": 8897,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1080,13 +1098,13 @@
                           "memberName": "Contributable",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1059:20:17",
+                          "src": "1073:20:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1004:75:17",
+                        "src": "1018:75:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1095,14 +1113,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e206120636f6e74726962757461626c652070726f6a6563742e",
-                        "id": 8073,
+                        "id": 8899,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1081:63:17",
+                        "src": "1095:63:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_2271272d034c3dbdf45c930870846a40f817cf687c77202319588036589492bc",
@@ -1122,21 +1140,21 @@
                           "typeString": "literal_string \"This action can only be performed on a contributable project.\""
                         }
                       ],
-                      "id": 8063,
+                      "id": 8889,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "996:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1010:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8074,
+                    "id": 8900,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1144,38 +1162,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "996:149:17",
+                    "src": "1010:149:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8075,
+                  "id": 8901,
                   "nodeType": "ExpressionStatement",
-                  "src": "996:149:17"
+                  "src": "1010:149:22"
                 },
                 {
-                  "id": 8076,
+                  "id": 8902,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1155:1:17"
+                  "src": "1169:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8078,
+            "id": 8904,
             "name": "onlyContributableProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8062,
+              "id": 8888,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8061,
+                  "id": 8887,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8078,
-                  "src": "969:15:17",
+                  "scope": 8904,
+                  "src": "983:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1183,10 +1201,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8060,
+                    "id": 8886,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "969:4:17",
+                    "src": "983:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1196,16 +1214,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "968:17:17"
+              "src": "982:17:22"
             },
-            "src": "935:228:17",
+            "src": "949:228:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8096,
+              "id": 8922,
               "nodeType": "Block",
-              "src": "1220:178:17",
+              "src": "1234:178:22",
               "statements": [
                 {
                   "expression": {
@@ -1214,10 +1232,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8091,
+                        "id": 8917,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1230,12 +1248,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8086,
+                                  "id": 8912,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8080,
-                                  "src": "1277:10:17",
+                                  "referencedDeclaration": 8906,
+                                  "src": "1291:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -1251,32 +1269,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8084,
+                                  "id": 8910,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1245:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1259:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8085,
+                                "id": 8911,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1245:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1259:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8087,
+                              "id": 8913,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1284,7 +1302,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1245:43:17",
+                              "src": "1259:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -1298,18 +1316,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8083,
+                            "id": 8909,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1238:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1252:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8088,
+                          "id": 8914,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1317,9 +1335,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1238:51:17",
+                          "src": "1252:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -1329,18 +1347,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8089,
+                            "id": 8915,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1293:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1307:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8090,
+                          "id": 8916,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1348,13 +1366,13 @@
                           "memberName": "InDevelopment",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1293:20:17",
+                          "src": "1307:20:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1238:75:17",
+                        "src": "1252:75:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1363,14 +1381,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612070726f6a65637420696e20646576656c6f706d656e742e",
-                        "id": 8092,
+                        "id": 8918,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1315:64:17",
+                        "src": "1329:64:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_ac94ad903f10df345d82944b08b9b95d925f56f27d55fab2653ab47750017f21",
@@ -1390,21 +1408,21 @@
                           "typeString": "literal_string \"This action can only be performed on a project in development.\""
                         }
                       ],
-                      "id": 8082,
+                      "id": 8908,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "1230:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1244:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8093,
+                    "id": 8919,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1412,38 +1430,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1230:150:17",
+                    "src": "1244:150:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8094,
+                  "id": 8920,
                   "nodeType": "ExpressionStatement",
-                  "src": "1230:150:17"
+                  "src": "1244:150:22"
                 },
                 {
-                  "id": 8095,
+                  "id": 8921,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1390:1:17"
+                  "src": "1404:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8097,
+            "id": 8923,
             "name": "onlyInDevelopmentProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8081,
+              "id": 8907,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8080,
+                  "id": 8906,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8097,
-                  "src": "1203:15:17",
+                  "scope": 8923,
+                  "src": "1217:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1451,10 +1469,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8079,
+                    "id": 8905,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1203:4:17",
+                    "src": "1217:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1464,16 +1482,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1202:17:17"
+              "src": "1216:17:22"
             },
-            "src": "1169:229:17",
+            "src": "1183:229:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8115,
+              "id": 8941,
               "nodeType": "Block",
-              "src": "1452:171:17",
+              "src": "1466:171:22",
               "statements": [
                 {
                   "expression": {
@@ -1482,10 +1500,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8110,
+                        "id": 8936,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1498,12 +1516,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8105,
+                                  "id": 8931,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8099,
-                                  "src": "1509:10:17",
+                                  "referencedDeclaration": 8925,
+                                  "src": "1523:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -1519,32 +1537,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8103,
+                                  "id": 8929,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1477:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1491:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8104,
+                                "id": 8930,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1477:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1491:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8106,
+                              "id": 8932,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1552,7 +1570,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1477:43:17",
+                              "src": "1491:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -1566,18 +1584,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8102,
+                            "id": 8928,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1470:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1484:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8107,
+                          "id": 8933,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1585,9 +1603,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1470:51:17",
+                          "src": "1484:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -1597,18 +1615,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8108,
+                            "id": 8934,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1525:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1539:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8109,
+                          "id": 8935,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1616,13 +1634,13 @@
                           "memberName": "Refundable",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1525:17:17",
+                          "src": "1539:17:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1470:72:17",
+                        "src": "1484:72:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1631,14 +1649,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e206120726566756e6461626c652070726f6a6563742e",
-                        "id": 8111,
+                        "id": 8937,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1544:60:17",
+                        "src": "1558:60:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_22e7a006f2b949cc7753e2d1524234958936801cb4a8ae73c54a3f315194e646",
@@ -1658,21 +1676,21 @@
                           "typeString": "literal_string \"This action can only be performed on a refundable project.\""
                         }
                       ],
-                      "id": 8101,
+                      "id": 8927,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "1462:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1476:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8112,
+                    "id": 8938,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1680,38 +1698,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1462:143:17",
+                    "src": "1476:143:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8113,
+                  "id": 8939,
                   "nodeType": "ExpressionStatement",
-                  "src": "1462:143:17"
+                  "src": "1476:143:22"
                 },
                 {
-                  "id": 8114,
+                  "id": 8940,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1615:1:17"
+                  "src": "1629:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8116,
+            "id": 8942,
             "name": "onlyRefundableProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8100,
+              "id": 8926,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8099,
+                  "id": 8925,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8116,
-                  "src": "1435:15:17",
+                  "scope": 8942,
+                  "src": "1449:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1719,10 +1737,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8098,
+                    "id": 8924,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1435:4:17",
+                    "src": "1449:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1732,107 +1750,109 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1434:17:17"
+              "src": "1448:17:22"
             },
-            "src": "1404:219:17",
+            "src": "1418:219:22",
             "visibility": "internal"
           },
           {
             "canonicalName": "ProjectBase.Status",
-            "id": 8124,
+            "id": 8950,
             "members": [
               {
-                "id": 8117,
+                "id": 8943,
                 "name": "Inactive",
                 "nodeType": "EnumValue",
-                "src": "1642:8:17"
+                "src": "1656:8:22"
               },
               {
-                "id": 8118,
+                "id": 8944,
                 "name": "Draft",
                 "nodeType": "EnumValue",
-                "src": "1652:5:17"
+                "src": "1666:5:22"
               },
               {
-                "id": 8119,
+                "id": 8945,
                 "name": "Pending",
                 "nodeType": "EnumValue",
-                "src": "1659:7:17"
+                "src": "1673:7:22"
               },
               {
-                "id": 8120,
+                "id": 8946,
                 "name": "Contributable",
                 "nodeType": "EnumValue",
-                "src": "1668:13:17"
+                "src": "1682:13:22"
               },
               {
-                "id": 8121,
+                "id": 8947,
                 "name": "InDevelopment",
                 "nodeType": "EnumValue",
-                "src": "1683:13:17"
+                "src": "1697:13:22"
               },
               {
-                "id": 8122,
+                "id": 8948,
                 "name": "Refundable",
                 "nodeType": "EnumValue",
-                "src": "1698:10:17"
+                "src": "1712:10:22"
               },
               {
-                "id": 8123,
+                "id": 8949,
                 "name": "Rejected",
                 "nodeType": "EnumValue",
-                "src": "1710:8:17"
+                "src": "1724:8:22"
               }
             ],
             "name": "Status",
             "nodeType": "EnumDefinition",
-            "src": "1629:90:17"
+            "src": "1643:90:22"
           },
           {
             "constant": false,
-            "id": 8126,
+            "id": 8952,
             "name": "fundingStorage",
             "nodeType": "VariableDeclaration",
-            "scope": 8127,
-            "src": "1725:22:17",
+            "scope": 8953,
+            "src": "1739:36:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_address",
-              "typeString": "address"
+              "typeIdentifier": "t_contract$_FundingStorage_$1448",
+              "typeString": "contract FundingStorage"
             },
             "typeName": {
-              "id": 8125,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "1725:7:17",
+              "contractScope": null,
+              "id": 8951,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "1739:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             },
             "value": null,
-            "visibility": "internal"
+            "visibility": "public"
           }
         ],
-        "scope": 8128,
-        "src": "167:1583:17"
+        "scope": 8954,
+        "src": "167:1611:22"
       }
     ],
-    "src": "0:1751:17"
+    "src": "0:1779:22"
   },
   "legacyAST": {
-    "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/project/ProjectBase.sol",
     "exportedSymbols": {
       "ProjectBase": [
-        8127
+        8953
       ]
     },
-    "id": 8128,
+    "id": 8954,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 7993,
+        "id": 8819,
         "literals": [
           "solidity",
           "^",
@@ -1840,38 +1860,38 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:17"
+        "src": "0:24:22"
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
         "file": "../libraries/storage/ProjectStorageAccess.sol",
-        "id": 7994,
+        "id": 8820,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 7771,
-        "src": "26:55:17",
+        "scope": 8954,
+        "sourceUnit": 8469,
+        "src": "26:55:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/DeveloperStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/DeveloperStorageAccess.sol",
         "file": "../libraries/storage/DeveloperStorageAccess.sol",
-        "id": 7995,
+        "id": 8821,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 2819,
-        "src": "82:57:17",
+        "scope": 8954,
+        "sourceUnit": 3862,
+        "src": "82:57:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/Testable.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/Testable.sol",
         "file": "../Testable.sol",
-        "id": 7996,
+        "id": 8822,
         "nodeType": "ImportDirective",
-        "scope": 8128,
-        "sourceUnit": 749,
-        "src": "140:25:17",
+        "scope": 8954,
+        "sourceUnit": 1754,
+        "src": "140:25:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -1881,94 +1901,98 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 7997,
+              "id": 8823,
               "name": "Testable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 748,
-              "src": "191:8:17",
+              "referencedDeclaration": 1753,
+              "src": "191:8:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Testable_$748",
+                "typeIdentifier": "t_contract$_Testable_$1753",
                 "typeString": "contract Testable"
               }
             },
-            "id": 7998,
+            "id": 8824,
             "nodeType": "InheritanceSpecifier",
-            "src": "191:8:17"
+            "src": "191:8:22"
           }
         ],
         "contractDependencies": [
-          748
+          1753
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 8127,
+        "id": 8953,
         "linearizedBaseContracts": [
-          8127,
-          748
+          8953,
+          1753
         ],
         "name": "ProjectBase",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 8001,
+            "id": 8827,
             "libraryName": {
               "contractScope": null,
-              "id": 7999,
+              "id": 8825,
               "name": "ProjectStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7770,
-              "src": "213:20:17",
+              "referencedDeclaration": 8468,
+              "src": "213:20:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ProjectStorageAccess_$7770",
+                "typeIdentifier": "t_contract$_ProjectStorageAccess_$8468",
                 "typeString": "library ProjectStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "207:39:17",
+            "src": "207:46:22",
             "typeName": {
-              "id": 8000,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "238:7:17",
+              "contractScope": null,
+              "id": 8826,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "238:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
-            "id": 8004,
+            "id": 8830,
             "libraryName": {
               "contractScope": null,
-              "id": 8002,
+              "id": 8828,
               "name": "DeveloperStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2818,
-              "src": "257:22:17",
+              "referencedDeclaration": 3861,
+              "src": "264:22:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_DeveloperStorageAccess_$2818",
+                "typeIdentifier": "t_contract$_DeveloperStorageAccess_$3861",
                 "typeString": "library DeveloperStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "251:41:17",
+            "src": "258:48:22",
             "typeName": {
-              "id": 8003,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "284:7:17",
+              "contractScope": null,
+              "id": 8829,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "291:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
             "body": {
-              "id": 8020,
+              "id": 8846,
               "nodeType": "Block",
-              "src": "345:158:17",
+              "src": "359:158:22",
               "statements": [
                 {
                   "expression": {
@@ -1980,7 +2004,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 8015,
+                        "id": 8841,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1989,18 +2013,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8009,
+                            "id": 8835,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 9342,
-                            "src": "363:3:17",
+                            "referencedDeclaration": 11097,
+                            "src": "377:3:22",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 8010,
+                          "id": 8836,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2008,7 +2032,7 @@
                           "memberName": "sender",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "363:10:17",
+                          "src": "377:10:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -2021,12 +2045,12 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 8013,
+                              "id": 8839,
                               "name": "_projectId",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 8006,
-                              "src": "412:10:17",
+                              "referencedDeclaration": 8832,
+                              "src": "426:10:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -2042,32 +2066,32 @@
                             ],
                             "expression": {
                               "argumentTypes": null,
-                              "id": 8011,
+                              "id": 8837,
                               "name": "fundingStorage",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 8126,
-                              "src": "377:14:17",
+                              "referencedDeclaration": 8952,
+                              "src": "391:14:22",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_address",
-                                "typeString": "address"
+                                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                "typeString": "contract FundingStorage"
                               }
                             },
-                            "id": 8012,
+                            "id": 8838,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "getProjectDeveloper",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3027,
-                            "src": "377:34:17",
+                            "referencedDeclaration": 4062,
+                            "src": "391:34:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_address_$bound_to$_t_address_$",
-                              "typeString": "function (address,uint256) view returns (address)"
+                              "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                              "typeString": "function (contract FundingStorage,uint256) view returns (address)"
                             }
                           },
-                          "id": 8014,
+                          "id": 8840,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2075,13 +2099,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "377:46:17",
+                          "src": "391:46:22",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "363:60:17",
+                        "src": "377:60:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -2090,14 +2114,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "596f75206d757374206265207468652070726f6a65637420646576656c6f70657220746f20706572666f726d207468697320616374696f6e2e",
-                        "id": 8016,
+                        "id": 8842,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "425:59:17",
+                        "src": "439:59:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_97e9ca7532691841f16fb5e7eaebc3c94d5e0b17b2102ce773f5719855267386",
@@ -2117,21 +2141,21 @@
                           "typeString": "literal_string \"You must be the project developer to perform this action.\""
                         }
                       ],
-                      "id": 8008,
+                      "id": 8834,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "355:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "369:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8017,
+                    "id": 8843,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2139,38 +2163,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "355:130:17",
+                    "src": "369:130:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8018,
+                  "id": 8844,
                   "nodeType": "ExpressionStatement",
-                  "src": "355:130:17"
+                  "src": "369:130:22"
                 },
                 {
-                  "id": 8019,
+                  "id": 8845,
                   "nodeType": "PlaceholderStatement",
-                  "src": "495:1:17"
+                  "src": "509:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8021,
+            "id": 8847,
             "name": "onlyProjectDeveloper",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8007,
+              "id": 8833,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8006,
+                  "id": 8832,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8021,
-                  "src": "328:15:17",
+                  "scope": 8847,
+                  "src": "342:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2178,10 +2202,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8005,
+                    "id": 8831,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "328:4:17",
+                    "src": "342:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2191,16 +2215,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "327:17:17"
+              "src": "341:17:22"
             },
-            "src": "298:205:17",
+            "src": "312:205:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8039,
+              "id": 8865,
               "nodeType": "Block",
-              "src": "552:161:17",
+              "src": "566:161:22",
               "statements": [
                 {
                   "expression": {
@@ -2209,10 +2233,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8034,
+                        "id": 8860,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2225,12 +2249,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8029,
+                                  "id": 8855,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8023,
-                                  "src": "609:10:17",
+                                  "referencedDeclaration": 8849,
+                                  "src": "623:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -2246,32 +2270,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8027,
+                                  "id": 8853,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "577:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "591:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8028,
+                                "id": 8854,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "577:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "591:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8030,
+                              "id": 8856,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -2279,7 +2303,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "577:43:17",
+                              "src": "591:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -2293,18 +2317,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8026,
+                            "id": 8852,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "570:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "584:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8031,
+                          "id": 8857,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2312,9 +2336,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "570:51:17",
+                          "src": "584:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -2324,18 +2348,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8032,
+                            "id": 8858,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "625:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "639:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8033,
+                          "id": 8859,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2343,13 +2367,13 @@
                           "memberName": "Draft",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "625:12:17",
+                          "src": "639:12:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "570:67:17",
+                        "src": "584:67:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -2358,14 +2382,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612064726166742070726f6a6563742e",
-                        "id": 8035,
+                        "id": 8861,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "639:55:17",
+                        "src": "653:55:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_6a8905144cdbba6a872b48030baf252db3df82ccda3b68788f1dfa18dc72a6ad",
@@ -2385,21 +2409,21 @@
                           "typeString": "literal_string \"This action can only be performed on a draft project.\""
                         }
                       ],
-                      "id": 8025,
+                      "id": 8851,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "562:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "576:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8036,
+                    "id": 8862,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2407,38 +2431,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "562:133:17",
+                    "src": "576:133:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8037,
+                  "id": 8863,
                   "nodeType": "ExpressionStatement",
-                  "src": "562:133:17"
+                  "src": "576:133:22"
                 },
                 {
-                  "id": 8038,
+                  "id": 8864,
                   "nodeType": "PlaceholderStatement",
-                  "src": "705:1:17"
+                  "src": "719:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8040,
+            "id": 8866,
             "name": "onlyDraftProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8024,
+              "id": 8850,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8023,
+                  "id": 8849,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8040,
-                  "src": "535:15:17",
+                  "scope": 8866,
+                  "src": "549:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2446,10 +2470,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8022,
+                    "id": 8848,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "535:4:17",
+                    "src": "549:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2459,16 +2483,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "534:17:17"
+              "src": "548:17:22"
             },
-            "src": "509:204:17",
+            "src": "523:204:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8058,
+              "id": 8884,
               "nodeType": "Block",
-              "src": "764:165:17",
+              "src": "778:165:22",
               "statements": [
                 {
                   "expression": {
@@ -2477,10 +2501,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8053,
+                        "id": 8879,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2493,12 +2517,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8048,
+                                  "id": 8874,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8042,
-                                  "src": "821:10:17",
+                                  "referencedDeclaration": 8868,
+                                  "src": "835:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -2514,32 +2538,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8046,
+                                  "id": 8872,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "789:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "803:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8047,
+                                "id": 8873,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "789:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "803:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8049,
+                              "id": 8875,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -2547,7 +2571,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "789:43:17",
+                              "src": "803:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -2561,18 +2585,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8045,
+                            "id": 8871,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "782:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "796:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8050,
+                          "id": 8876,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2580,9 +2604,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "782:51:17",
+                          "src": "796:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -2592,18 +2616,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8051,
+                            "id": 8877,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "837:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "851:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8052,
+                          "id": 8878,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2611,13 +2635,13 @@
                           "memberName": "Pending",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "837:14:17",
+                          "src": "851:14:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "782:69:17",
+                        "src": "796:69:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -2626,14 +2650,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612070656e64696e672070726f6a6563742e",
-                        "id": 8054,
+                        "id": 8880,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "853:57:17",
+                        "src": "867:57:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_a7f98f21e78edef5113e0f374e4395642d4d57ec102f5ce2506a27df5861b870",
@@ -2653,21 +2677,21 @@
                           "typeString": "literal_string \"This action can only be performed on a pending project.\""
                         }
                       ],
-                      "id": 8044,
+                      "id": 8870,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "774:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "788:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8055,
+                    "id": 8881,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2675,38 +2699,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "774:137:17",
+                    "src": "788:137:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8056,
+                  "id": 8882,
                   "nodeType": "ExpressionStatement",
-                  "src": "774:137:17"
+                  "src": "788:137:22"
                 },
                 {
-                  "id": 8057,
+                  "id": 8883,
                   "nodeType": "PlaceholderStatement",
-                  "src": "921:1:17"
+                  "src": "935:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8059,
+            "id": 8885,
             "name": "onlyPendingProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8043,
+              "id": 8869,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8042,
+                  "id": 8868,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8059,
-                  "src": "747:15:17",
+                  "scope": 8885,
+                  "src": "761:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2714,10 +2738,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8041,
+                    "id": 8867,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "747:4:17",
+                    "src": "761:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2727,16 +2751,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "746:17:17"
+              "src": "760:17:22"
             },
-            "src": "719:210:17",
+            "src": "733:210:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8077,
+              "id": 8903,
               "nodeType": "Block",
-              "src": "986:177:17",
+              "src": "1000:177:22",
               "statements": [
                 {
                   "expression": {
@@ -2745,10 +2769,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8072,
+                        "id": 8898,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -2761,12 +2785,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8067,
+                                  "id": 8893,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8061,
-                                  "src": "1043:10:17",
+                                  "referencedDeclaration": 8887,
+                                  "src": "1057:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -2782,32 +2806,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8065,
+                                  "id": 8891,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1011:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1025:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8066,
+                                "id": 8892,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1011:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1025:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8068,
+                              "id": 8894,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -2815,7 +2839,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1011:43:17",
+                              "src": "1025:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -2829,18 +2853,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8064,
+                            "id": 8890,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1004:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1018:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8069,
+                          "id": 8895,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -2848,9 +2872,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1004:51:17",
+                          "src": "1018:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -2860,18 +2884,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8070,
+                            "id": 8896,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1059:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1073:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8071,
+                          "id": 8897,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -2879,13 +2903,13 @@
                           "memberName": "Contributable",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1059:20:17",
+                          "src": "1073:20:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1004:75:17",
+                        "src": "1018:75:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -2894,14 +2918,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e206120636f6e74726962757461626c652070726f6a6563742e",
-                        "id": 8073,
+                        "id": 8899,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1081:63:17",
+                        "src": "1095:63:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_2271272d034c3dbdf45c930870846a40f817cf687c77202319588036589492bc",
@@ -2921,21 +2945,21 @@
                           "typeString": "literal_string \"This action can only be performed on a contributable project.\""
                         }
                       ],
-                      "id": 8063,
+                      "id": 8889,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "996:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1010:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8074,
+                    "id": 8900,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2943,38 +2967,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "996:149:17",
+                    "src": "1010:149:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8075,
+                  "id": 8901,
                   "nodeType": "ExpressionStatement",
-                  "src": "996:149:17"
+                  "src": "1010:149:22"
                 },
                 {
-                  "id": 8076,
+                  "id": 8902,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1155:1:17"
+                  "src": "1169:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8078,
+            "id": 8904,
             "name": "onlyContributableProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8062,
+              "id": 8888,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8061,
+                  "id": 8887,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8078,
-                  "src": "969:15:17",
+                  "scope": 8904,
+                  "src": "983:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -2982,10 +3006,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8060,
+                    "id": 8886,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "969:4:17",
+                    "src": "983:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2995,16 +3019,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "968:17:17"
+              "src": "982:17:22"
             },
-            "src": "935:228:17",
+            "src": "949:228:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8096,
+              "id": 8922,
               "nodeType": "Block",
-              "src": "1220:178:17",
+              "src": "1234:178:22",
               "statements": [
                 {
                   "expression": {
@@ -3013,10 +3037,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8091,
+                        "id": 8917,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3029,12 +3053,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8086,
+                                  "id": 8912,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8080,
-                                  "src": "1277:10:17",
+                                  "referencedDeclaration": 8906,
+                                  "src": "1291:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -3050,32 +3074,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8084,
+                                  "id": 8910,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1245:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1259:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8085,
+                                "id": 8911,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1245:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1259:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8087,
+                              "id": 8913,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -3083,7 +3107,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1245:43:17",
+                              "src": "1259:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -3097,18 +3121,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8083,
+                            "id": 8909,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1238:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1252:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8088,
+                          "id": 8914,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3116,9 +3140,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1238:51:17",
+                          "src": "1252:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -3128,18 +3152,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8089,
+                            "id": 8915,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1293:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1307:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8090,
+                          "id": 8916,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3147,13 +3171,13 @@
                           "memberName": "InDevelopment",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1293:20:17",
+                          "src": "1307:20:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1238:75:17",
+                        "src": "1252:75:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -3162,14 +3186,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e20612070726f6a65637420696e20646576656c6f706d656e742e",
-                        "id": 8092,
+                        "id": 8918,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1315:64:17",
+                        "src": "1329:64:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_ac94ad903f10df345d82944b08b9b95d925f56f27d55fab2653ab47750017f21",
@@ -3189,21 +3213,21 @@
                           "typeString": "literal_string \"This action can only be performed on a project in development.\""
                         }
                       ],
-                      "id": 8082,
+                      "id": 8908,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "1230:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1244:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8093,
+                    "id": 8919,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3211,38 +3235,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1230:150:17",
+                    "src": "1244:150:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8094,
+                  "id": 8920,
                   "nodeType": "ExpressionStatement",
-                  "src": "1230:150:17"
+                  "src": "1244:150:22"
                 },
                 {
-                  "id": 8095,
+                  "id": 8921,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1390:1:17"
+                  "src": "1404:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8097,
+            "id": 8923,
             "name": "onlyInDevelopmentProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8081,
+              "id": 8907,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8080,
+                  "id": 8906,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8097,
-                  "src": "1203:15:17",
+                  "scope": 8923,
+                  "src": "1217:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3250,10 +3274,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8079,
+                    "id": 8905,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1203:4:17",
+                    "src": "1217:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3263,16 +3287,16 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1202:17:17"
+              "src": "1216:17:22"
             },
-            "src": "1169:229:17",
+            "src": "1183:229:22",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 8115,
+              "id": 8941,
               "nodeType": "Block",
-              "src": "1452:171:17",
+              "src": "1466:171:22",
               "statements": [
                 {
                   "expression": {
@@ -3281,10 +3305,10 @@
                       {
                         "argumentTypes": null,
                         "commonType": {
-                          "typeIdentifier": "t_enum$_Status_$8124",
+                          "typeIdentifier": "t_enum$_Status_$8950",
                           "typeString": "enum ProjectBase.Status"
                         },
-                        "id": 8110,
+                        "id": 8936,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -3297,12 +3321,12 @@
                               "arguments": [
                                 {
                                   "argumentTypes": null,
-                                  "id": 8105,
+                                  "id": 8931,
                                   "name": "_projectId",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8099,
-                                  "src": "1509:10:17",
+                                  "referencedDeclaration": 8925,
+                                  "src": "1523:10:22",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_uint256",
                                     "typeString": "uint256"
@@ -3318,32 +3342,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8103,
+                                  "id": 8929,
                                   "name": "fundingStorage",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 8126,
-                                  "src": "1477:14:17",
+                                  "referencedDeclaration": 8952,
+                                  "src": "1491:14:22",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_address",
-                                    "typeString": "address"
+                                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                                    "typeString": "contract FundingStorage"
                                   }
                                 },
-                                "id": 8104,
+                                "id": 8930,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getProjectStatus",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2935,
-                                "src": "1477:31:17",
+                                "referencedDeclaration": 3978,
+                                "src": "1491:31:22",
                                 "typeDescriptions": {
-                                  "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                                  "typeString": "function (address,uint256) view returns (uint256)"
+                                  "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                                  "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                                 }
                               },
-                              "id": 8106,
+                              "id": 8932,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -3351,7 +3375,7 @@
                               "lValueRequested": false,
                               "names": [],
                               "nodeType": "FunctionCall",
-                              "src": "1477:43:17",
+                              "src": "1491:43:22",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
@@ -3365,18 +3389,18 @@
                                 "typeString": "uint256"
                               }
                             ],
-                            "id": 8102,
+                            "id": 8928,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1470:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1484:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8107,
+                          "id": 8933,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -3384,9 +3408,9 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "1470:51:17",
+                          "src": "1484:51:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
@@ -3396,18 +3420,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 8108,
+                            "id": 8934,
                             "name": "Status",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 8124,
-                            "src": "1525:6:17",
+                            "referencedDeclaration": 8950,
+                            "src": "1539:6:22",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_type$_t_enum$_Status_$8124_$",
+                              "typeIdentifier": "t_type$_t_enum$_Status_$8950_$",
                               "typeString": "type(enum ProjectBase.Status)"
                             }
                           },
-                          "id": 8109,
+                          "id": 8935,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -3415,13 +3439,13 @@
                           "memberName": "Refundable",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "1525:17:17",
+                          "src": "1539:17:22",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_enum$_Status_$8124",
+                            "typeIdentifier": "t_enum$_Status_$8950",
                             "typeString": "enum ProjectBase.Status"
                           }
                         },
-                        "src": "1470:72:17",
+                        "src": "1484:72:22",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -3430,14 +3454,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5468697320616374696f6e2063616e206f6e6c7920626520706572666f726d6564206f6e206120726566756e6461626c652070726f6a6563742e",
-                        "id": 8111,
+                        "id": 8937,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "string",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "1544:60:17",
+                        "src": "1558:60:22",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_stringliteral_22e7a006f2b949cc7753e2d1524234958936801cb4a8ae73c54a3f315194e646",
@@ -3457,21 +3481,21 @@
                           "typeString": "literal_string \"This action can only be performed on a refundable project.\""
                         }
                       ],
-                      "id": 8101,
+                      "id": 8927,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        9345,
-                        9346
+                        11100,
+                        11101
                       ],
-                      "referencedDeclaration": 9346,
-                      "src": "1462:7:17",
+                      "referencedDeclaration": 11101,
+                      "src": "1476:7:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
                         "typeString": "function (bool,string memory) pure"
                       }
                     },
-                    "id": 8112,
+                    "id": 8938,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -3479,38 +3503,38 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "1462:143:17",
+                    "src": "1476:143:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8113,
+                  "id": 8939,
                   "nodeType": "ExpressionStatement",
-                  "src": "1462:143:17"
+                  "src": "1476:143:22"
                 },
                 {
-                  "id": 8114,
+                  "id": 8940,
                   "nodeType": "PlaceholderStatement",
-                  "src": "1615:1:17"
+                  "src": "1629:1:22"
                 }
               ]
             },
             "documentation": null,
-            "id": 8116,
+            "id": 8942,
             "name": "onlyRefundableProject",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 8100,
+              "id": 8926,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8099,
+                  "id": 8925,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8116,
-                  "src": "1435:15:17",
+                  "scope": 8942,
+                  "src": "1449:15:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -3518,10 +3542,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8098,
+                    "id": 8924,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "1435:4:17",
+                    "src": "1449:4:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -3531,100 +3555,102 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "1434:17:17"
+              "src": "1448:17:22"
             },
-            "src": "1404:219:17",
+            "src": "1418:219:22",
             "visibility": "internal"
           },
           {
             "canonicalName": "ProjectBase.Status",
-            "id": 8124,
+            "id": 8950,
             "members": [
               {
-                "id": 8117,
+                "id": 8943,
                 "name": "Inactive",
                 "nodeType": "EnumValue",
-                "src": "1642:8:17"
+                "src": "1656:8:22"
               },
               {
-                "id": 8118,
+                "id": 8944,
                 "name": "Draft",
                 "nodeType": "EnumValue",
-                "src": "1652:5:17"
+                "src": "1666:5:22"
               },
               {
-                "id": 8119,
+                "id": 8945,
                 "name": "Pending",
                 "nodeType": "EnumValue",
-                "src": "1659:7:17"
+                "src": "1673:7:22"
               },
               {
-                "id": 8120,
+                "id": 8946,
                 "name": "Contributable",
                 "nodeType": "EnumValue",
-                "src": "1668:13:17"
+                "src": "1682:13:22"
               },
               {
-                "id": 8121,
+                "id": 8947,
                 "name": "InDevelopment",
                 "nodeType": "EnumValue",
-                "src": "1683:13:17"
+                "src": "1697:13:22"
               },
               {
-                "id": 8122,
+                "id": 8948,
                 "name": "Refundable",
                 "nodeType": "EnumValue",
-                "src": "1698:10:17"
+                "src": "1712:10:22"
               },
               {
-                "id": 8123,
+                "id": 8949,
                 "name": "Rejected",
                 "nodeType": "EnumValue",
-                "src": "1710:8:17"
+                "src": "1724:8:22"
               }
             ],
             "name": "Status",
             "nodeType": "EnumDefinition",
-            "src": "1629:90:17"
+            "src": "1643:90:22"
           },
           {
             "constant": false,
-            "id": 8126,
+            "id": 8952,
             "name": "fundingStorage",
             "nodeType": "VariableDeclaration",
-            "scope": 8127,
-            "src": "1725:22:17",
+            "scope": 8953,
+            "src": "1739:36:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_address",
-              "typeString": "address"
+              "typeIdentifier": "t_contract$_FundingStorage_$1448",
+              "typeString": "contract FundingStorage"
             },
             "typeName": {
-              "id": 8125,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "1725:7:17",
+              "contractScope": null,
+              "id": 8951,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "1739:14:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             },
             "value": null,
-            "visibility": "internal"
+            "visibility": "public"
           }
         ],
-        "scope": 8128,
-        "src": "167:1583:17"
+        "scope": 8954,
+        "src": "167:1611:22"
       }
     ],
-    "src": "0:1751:17"
+    "src": "0:1779:22"
   },
   "compiler": {
     "name": "solc",
     "version": "0.4.24+commit.e67f0147.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-26T16:56:22.973Z"
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-10-15T04:09:23.906Z"
 }

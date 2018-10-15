@@ -5,6 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "build-api": "rm -rf build && mkdir build && cp -R communication-api/ build/communication-api/ && ./node_modules/.bin/babel communication-api --out-dir build/communication-api",
+    "build": "cd smart-contracts/ethereum && ./node_modules/.bin/truffle compile && cd ../../ && npm run build-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "SEE LICENSE IN LICENSE.md",
@@ -28,6 +29,9 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-stage-1": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
+    "babel-plugin-transform-es3-property-literals": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2"

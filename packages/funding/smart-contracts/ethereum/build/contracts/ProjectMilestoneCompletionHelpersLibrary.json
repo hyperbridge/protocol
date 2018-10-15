@@ -1,24 +1,24 @@
 {
   "contractName": "ProjectMilestoneCompletionHelpersLibrary",
   "abi": [],
-  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f30073000000000000000000000000000000000000000030146080604052600080fd00a165627a7a72305820f4f81e7270ffe06f6e87694ea310ddce409f4fcd3d778742dc8e674565abeff80029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fd00a165627a7a72305820f4f81e7270ffe06f6e87694ea310ddce409f4fcd3d778742dc8e674565abeff80029",
-  "sourceMap": "184:764:6:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
-  "deployedSourceMap": "184:764:6:-;;;;;;;;",
-  "source": "pragma solidity ^0.4.24;\n\nimport \"./storage/ProjectStorageAccess.sol\";\nimport \"./storage/ContributionStorageAccess.sol\";\nimport \"../FundingVault.sol\";\nimport \"../FundingStorage.sol\";\n\nlibrary ProjectMilestoneCompletionHelpersLibrary {\n\n    using ProjectStorageAccess for address;\n    using ContributionStorageAccess for address;\n\n    function releaseMilestoneFunds(address _fundingStorage, uint _projectId, uint _index) internal {\n        uint fundsRaised = _fundingStorage.getProjectFundsRaised(_projectId);\n        uint percentageToSend = _fundingStorage.getTimelineMilestonePercentage(_projectId, _index);\n        uint amountToSend = fundsRaised * percentageToSend / 100;\n        address developer = _fundingStorage.getProjectDeveloper(_projectId);\n        FundingStorage fs = FundingStorage(_fundingStorage);\n        FundingVault fv = FundingVault(fs.getContractAddress(\"FundingVault\"));\n        fv.withdrawEth(amountToSend, developer);\n    }\n}\n",
-  "sourcePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
+  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f30073000000000000000000000000000000000000000030146080604052600080fd00a165627a7a723058202cc298472ce525e277c4e54ab2380a23a6ba3035190e5e53430dc89adb92890d0029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fd00a165627a7a723058202cc298472ce525e277c4e54ab2380a23a6ba3035190e5e53430dc89adb92890d0029",
+  "sourceMap": "184:986:10:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
+  "deployedSourceMap": "184:986:10:-;;;;;;;;",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"./storage/ProjectStorageAccess.sol\";\nimport \"./storage/ContributionStorageAccess.sol\";\nimport \"../FundingVault.sol\";\nimport \"../FundingStorage.sol\";\n\nlibrary ProjectMilestoneCompletionHelpersLibrary {\n\n    using SafeMath for uint256;\n    using ProjectStorageAccess for FundingStorage;\n    using ContributionStorageAccess for FundingStorage;\n\n    function releaseMilestoneFunds(FundingStorage _fundingStorage, uint _projectId, uint _index) internal {\n        uint fundsRaised = _fundingStorage.getProjectFundsRaised(_projectId);\n        uint percentageToSend = _fundingStorage.getTimelineMilestonePercentage(_projectId, _index);\n        uint currentFundsReleased = _fundingStorage.getProjectPercentageFundsReleased(_projectId);\n        _fundingStorage.setProjectPercentageFundsReleased(_projectId, currentFundsReleased + percentageToSend);\n        uint amountToSend = fundsRaised.mul(percentageToSend).div(100);\n        address developer = _fundingStorage.getProjectDeveloper(_projectId);\n        FundingVault fv = FundingVault(_fundingStorage.getContractAddress(\"FundingVault\"));\n        fv.withdrawEth(amountToSend, developer);\n    }\n}\n",
+  "sourcePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
   "ast": {
-    "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
     "exportedSymbols": {
       "ProjectMilestoneCompletionHelpersLibrary": [
-        900
+        1920
       ]
     },
-    "id": 901,
+    "id": 1921,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 827,
+        "id": 1832,
         "literals": [
           "solidity",
           "^",
@@ -26,49 +26,49 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:6"
+        "src": "0:24:10"
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
         "file": "./storage/ProjectStorageAccess.sol",
-        "id": 828,
+        "id": 1833,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 7771,
-        "src": "26:44:6",
+        "scope": 1921,
+        "sourceUnit": 8469,
+        "src": "26:44:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ContributionStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ContributionStorageAccess.sol",
         "file": "./storage/ContributionStorageAccess.sol",
-        "id": 829,
+        "id": 1834,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 1974,
-        "src": "71:49:6",
+        "scope": 1921,
+        "sourceUnit": 3013,
+        "src": "71:49:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/FundingVault.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/FundingVault.sol",
         "file": "../FundingVault.sol",
-        "id": 830,
+        "id": 1835,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 686,
-        "src": "121:29:6",
+        "scope": 1921,
+        "sourceUnit": 1634,
+        "src": "121:29:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/FundingStorage.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/FundingStorage.sol",
         "file": "../FundingStorage.sol",
-        "id": 831,
+        "id": 1836,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 501,
-        "src": "151:31:6",
+        "scope": 1921,
+        "sourceUnit": 1449,
+        "src": "151:31:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -78,85 +78,116 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 900,
+        "id": 1920,
         "linearizedBaseContracts": [
-          900
+          1920
         ],
         "name": "ProjectMilestoneCompletionHelpersLibrary",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 834,
+            "id": 1839,
             "libraryName": {
               "contractScope": null,
-              "id": 832,
-              "name": "ProjectStorageAccess",
+              "id": 1837,
+              "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7770,
-              "src": "246:20:6",
+              "referencedDeclaration": 8817,
+              "src": "246:8:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ProjectStorageAccess_$7770",
-                "typeString": "library ProjectStorageAccess"
+                "typeIdentifier": "t_contract$_SafeMath_$8817",
+                "typeString": "library SafeMath"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "240:39:6",
+            "src": "240:27:10",
             "typeName": {
-              "id": 833,
-              "name": "address",
+              "id": 1838,
+              "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "271:7:6",
+              "src": "259:7:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
               }
             }
           },
           {
-            "id": 837,
+            "id": 1842,
             "libraryName": {
               "contractScope": null,
-              "id": 835,
+              "id": 1840,
+              "name": "ProjectStorageAccess",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8468,
+              "src": "278:20:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProjectStorageAccess_$8468",
+                "typeString": "library ProjectStorageAccess"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "272:46:10",
+            "typeName": {
+              "contractScope": null,
+              "id": 1841,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "303:14:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
+              }
+            }
+          },
+          {
+            "id": 1845,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1843,
               "name": "ContributionStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1973,
-              "src": "290:25:6",
+              "referencedDeclaration": 3012,
+              "src": "329:25:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ContributionStorageAccess_$1973",
+                "typeIdentifier": "t_contract$_ContributionStorageAccess_$3012",
                 "typeString": "library ContributionStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "284:44:6",
+            "src": "323:51:10",
             "typeName": {
-              "id": 836,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "320:7:6",
+              "contractScope": null,
+              "id": 1844,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "359:14:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
             "body": {
-              "id": 898,
+              "id": 1918,
               "nodeType": "Block",
-              "src": "429:517:6",
+              "src": "482:686:10",
               "statements": [
                 {
                   "assignments": [
-                    847
+                    1855
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 847,
+                      "id": 1855,
                       "name": "fundsRaised",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "439:16:6",
+                      "scope": 1919,
+                      "src": "492:16:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -164,10 +195,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 846,
+                        "id": 1854,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "439:4:6",
+                        "src": "492:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -177,18 +208,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 852,
+                  "id": 1860,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 850,
+                        "id": 1858,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "496:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "549:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -204,32 +235,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 848,
+                        "id": 1856,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "458:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "511:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 849,
+                      "id": 1857,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "getProjectFundsRaised",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1691,
-                      "src": "458:37:6",
+                      "referencedDeclaration": 2699,
+                      "src": "511:37:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256) view returns (uint256)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 851,
+                    "id": 1859,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -237,27 +268,27 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "458:49:6",
+                    "src": "511:49:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "439:68:6"
+                  "src": "492:68:10"
                 },
                 {
                   "assignments": [
-                    854
+                    1862
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 854,
+                      "id": 1862,
                       "name": "percentageToSend",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "517:21:6",
+                      "scope": 1919,
+                      "src": "570:21:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -265,10 +296,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 853,
+                        "id": 1861,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "517:4:6",
+                        "src": "570:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -278,18 +309,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 860,
+                  "id": 1868,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 857,
+                        "id": 1865,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "588:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "641:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -297,12 +328,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 858,
+                        "id": 1866,
                         "name": "_index",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 843,
-                        "src": "600:6:6",
+                        "referencedDeclaration": 1851,
+                        "src": "653:6:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -322,32 +353,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 855,
+                        "id": 1863,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "541:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "594:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 856,
+                      "id": 1864,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "getTimelineMilestonePercentage",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3389,
-                      "src": "541:46:6",
+                      "referencedDeclaration": 4392,
+                      "src": "594:46:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256,uint256) view returns (uint256)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 859,
+                    "id": 1867,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -355,27 +386,27 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "541:66:6",
+                    "src": "594:66:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "517:90:6"
+                  "src": "570:90:10"
                 },
                 {
                   "assignments": [
-                    862
+                    1870
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 862,
-                      "name": "amountToSend",
+                      "id": 1870,
+                      "name": "currentFundsReleased",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "617:17:6",
+                      "scope": 1919,
+                      "src": "670:25:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -383,10 +414,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 861,
+                        "id": 1869,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "617:4:6",
+                        "src": "670:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -396,136 +427,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 868,
-                  "initialValue": {
-                    "argumentTypes": null,
-                    "commonType": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    },
-                    "id": 867,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftExpression": {
-                      "argumentTypes": null,
-                      "commonType": {
-                        "typeIdentifier": "t_uint256",
-                        "typeString": "uint256"
-                      },
-                      "id": 865,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "lValueRequested": false,
-                      "leftExpression": {
-                        "argumentTypes": null,
-                        "id": 863,
-                        "name": "fundsRaised",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 847,
-                        "src": "637:11:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_uint256",
-                          "typeString": "uint256"
-                        }
-                      },
-                      "nodeType": "BinaryOperation",
-                      "operator": "*",
-                      "rightExpression": {
-                        "argumentTypes": null,
-                        "id": 864,
-                        "name": "percentageToSend",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 854,
-                        "src": "651:16:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_uint256",
-                          "typeString": "uint256"
-                        }
-                      },
-                      "src": "637:30:6",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_uint256",
-                        "typeString": "uint256"
-                      }
-                    },
-                    "nodeType": "BinaryOperation",
-                    "operator": "/",
-                    "rightExpression": {
-                      "argumentTypes": null,
-                      "hexValue": "313030",
-                      "id": 866,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": true,
-                      "kind": "number",
-                      "lValueRequested": false,
-                      "nodeType": "Literal",
-                      "src": "670:3:6",
-                      "subdenomination": null,
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_rational_100_by_1",
-                        "typeString": "int_const 100"
-                      },
-                      "value": "100"
-                    },
-                    "src": "637:36:6",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "nodeType": "VariableDeclarationStatement",
-                  "src": "617:56:6"
-                },
-                {
-                  "assignments": [
-                    870
-                  ],
-                  "declarations": [
-                    {
-                      "constant": false,
-                      "id": 870,
-                      "name": "developer",
-                      "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "683:17:6",
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      },
-                      "typeName": {
-                        "id": 869,
-                        "name": "address",
-                        "nodeType": "ElementaryTypeName",
-                        "src": "683:7:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
-                        }
-                      },
-                      "value": null,
-                      "visibility": "internal"
-                    }
-                  ],
-                  "id": 875,
+                  "id": 1875,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 873,
+                        "id": 1873,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "739:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "748:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -541,32 +454,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 871,
+                        "id": 1871,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "703:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "698:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 872,
+                      "id": 1872,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberName": "getProjectDeveloper",
+                      "memberName": "getProjectPercentageFundsReleased",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3027,
-                      "src": "703:35:6",
+                      "referencedDeclaration": 2720,
+                      "src": "698:49:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_address_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256) view returns (address)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 874,
+                    "id": 1874,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -574,129 +487,420 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "703:47:6",
+                    "src": "698:61:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "683:67:6"
+                  "src": "670:89:10"
                 },
                 {
-                  "assignments": [
-                    877
-                  ],
-                  "declarations": [
-                    {
-                      "constant": false,
-                      "id": 877,
-                      "name": "fs",
-                      "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "760:17:6",
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_FundingStorage_$500",
-                        "typeString": "contract FundingStorage"
-                      },
-                      "typeName": {
-                        "contractScope": null,
-                        "id": 876,
-                        "name": "FundingStorage",
-                        "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 500,
-                        "src": "760:14:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingStorage_$500",
-                          "typeString": "contract FundingStorage"
-                        }
-                      },
-                      "value": null,
-                      "visibility": "internal"
-                    }
-                  ],
-                  "id": 881,
-                  "initialValue": {
+                  "expression": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 879,
-                        "name": "_fundingStorage",
+                        "id": 1879,
+                        "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "795:15:6",
+                        "referencedDeclaration": 1849,
+                        "src": "819:10:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 1882,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 1880,
+                          "name": "currentFundsReleased",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1870,
+                          "src": "831:20:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "+",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1881,
+                          "name": "percentageToSend",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "854:16:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "831:39:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       ],
-                      "id": 878,
-                      "name": "FundingStorage",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 500,
-                      "src": "780:14:6",
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1876,
+                        "name": "_fundingStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1847,
+                        "src": "769:15:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
+                        }
+                      },
+                      "id": 1878,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setProjectPercentageFundsReleased",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3011,
+                      "src": "769:49:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_FundingStorage_$500_$",
-                        "typeString": "type(contract FundingStorage)"
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_FundingStorage_$1448_$_t_uint256_$_t_uint256_$returns$__$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256,uint256)"
                       }
                     },
-                    "id": 880,
+                    "id": 1883,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
-                    "kind": "typeConversion",
+                    "kind": "functionCall",
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "780:31:6",
+                    "src": "769:102:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_FundingStorage_$500",
-                      "typeString": "contract FundingStorage"
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
                     }
                   },
-                  "nodeType": "VariableDeclarationStatement",
-                  "src": "760:51:6"
+                  "id": 1884,
+                  "nodeType": "ExpressionStatement",
+                  "src": "769:102:10"
                 },
                 {
                   "assignments": [
-                    883
+                    1886
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 883,
-                      "name": "fv",
+                      "id": 1886,
+                      "name": "amountToSend",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "821:15:6",
+                      "scope": 1919,
+                      "src": "881:17:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_FundingVault_$685",
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 1885,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "881:4:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1894,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "313030",
+                        "id": 1892,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "939:3:10",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        },
+                        "value": "100"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1889,
+                            "name": "percentageToSend",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1862,
+                            "src": "917:16:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1887,
+                            "name": "fundsRaised",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1855,
+                            "src": "901:11:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "id": 1888,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "mul",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 8724,
+                          "src": "901:15:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                            "typeString": "function (uint256,uint256) pure returns (uint256)"
+                          }
+                        },
+                        "id": 1890,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "901:33:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "id": 1891,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "div",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 8748,
+                      "src": "901:37:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                        "typeString": "function (uint256,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 1893,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "901:42:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "881:62:10"
+                },
+                {
+                  "assignments": [
+                    1896
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1896,
+                      "name": "developer",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1919,
+                      "src": "953:17:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 1895,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "953:7:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1901,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1899,
+                        "name": "_projectId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1849,
+                        "src": "1009:10:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1897,
+                        "name": "_fundingStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1847,
+                        "src": "973:15:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
+                        }
+                      },
+                      "id": 1898,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getProjectDeveloper",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4062,
+                      "src": "973:35:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (address)"
+                      }
+                    },
+                    "id": 1900,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "973:47:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "953:67:10"
+                },
+                {
+                  "assignments": [
+                    1903
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1903,
+                      "name": "fv",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1919,
+                      "src": "1030:15:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_FundingVault_$1633",
                         "typeString": "contract FundingVault"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 882,
+                        "id": 1902,
                         "name": "FundingVault",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 685,
-                        "src": "821:12:6",
+                        "referencedDeclaration": 1633,
+                        "src": "1030:12:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingVault_$685",
+                          "typeIdentifier": "t_contract$_FundingVault_$1633",
                           "typeString": "contract FundingVault"
                         }
                       },
@@ -704,7 +908,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 890,
+                  "id": 1910,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -714,14 +918,14 @@
                           {
                             "argumentTypes": null,
                             "hexValue": "46756e64696e675661756c74",
-                            "id": 887,
+                            "id": 1907,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "kind": "string",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "874:14:6",
+                            "src": "1096:14:10",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_stringliteral_25e77158453a461bab1099ad7b2da79bfda940c9045cbc64cbf30b89386b2d00",
@@ -739,32 +943,32 @@
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 885,
-                            "name": "fs",
+                            "id": 1905,
+                            "name": "_fundingStorage",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 877,
-                            "src": "852:2:6",
+                            "referencedDeclaration": 1847,
+                            "src": "1061:15:10",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_FundingStorage_$500",
+                              "typeIdentifier": "t_contract$_FundingStorage_$1448",
                               "typeString": "contract FundingStorage"
                             }
                           },
-                          "id": 886,
+                          "id": 1906,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "getContractAddress",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 235,
-                          "src": "852:21:6",
+                          "referencedDeclaration": 1183,
+                          "src": "1061:34:10",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_address_$",
                             "typeString": "function (string memory) view external returns (address)"
                           }
                         },
-                        "id": 888,
+                        "id": 1908,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -772,7 +976,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "852:37:6",
+                        "src": "1061:50:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -786,18 +990,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 884,
+                      "id": 1904,
                       "name": "FundingVault",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 685,
-                      "src": "839:12:6",
+                      "referencedDeclaration": 1633,
+                      "src": "1048:12:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_FundingVault_$685_$",
+                        "typeIdentifier": "t_type$_t_contract$_FundingVault_$1633_$",
                         "typeString": "type(contract FundingVault)"
                       }
                     },
-                    "id": 889,
+                    "id": 1909,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -805,14 +1009,14 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "839:51:6",
+                    "src": "1048:64:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_FundingVault_$685",
+                      "typeIdentifier": "t_contract$_FundingVault_$1633",
                       "typeString": "contract FundingVault"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "821:69:6"
+                  "src": "1030:82:10"
                 },
                 {
                   "expression": {
@@ -820,12 +1024,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 894,
+                        "id": 1914,
                         "name": "amountToSend",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 862,
-                        "src": "915:12:6",
+                        "referencedDeclaration": 1886,
+                        "src": "1137:12:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -833,12 +1037,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 895,
+                        "id": 1915,
                         "name": "developer",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 870,
-                        "src": "929:9:6",
+                        "referencedDeclaration": 1896,
+                        "src": "1151:9:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -858,32 +1062,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 891,
+                        "id": 1911,
                         "name": "fv",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 883,
-                        "src": "900:2:6",
+                        "referencedDeclaration": 1903,
+                        "src": "1122:2:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingVault_$685",
+                          "typeIdentifier": "t_contract$_FundingVault_$1633",
                           "typeString": "contract FundingVault"
                         }
                       },
-                      "id": 893,
+                      "id": 1913,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "withdrawEth",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 608,
-                      "src": "900:14:6",
+                      "referencedDeclaration": 1556,
+                      "src": "1122:14:10",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
                       }
                     },
-                    "id": 896,
+                    "id": 1916,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -891,20 +1095,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "900:39:6",
+                    "src": "1122:39:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 897,
+                  "id": 1917,
                   "nodeType": "ExpressionStatement",
-                  "src": "900:39:6"
+                  "src": "1122:39:10"
                 }
               ]
             },
             "documentation": null,
-            "id": 899,
+            "id": 1919,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -912,30 +1116,32 @@
             "name": "releaseMilestoneFunds",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 844,
+              "id": 1852,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 839,
+                  "id": 1847,
                   "name": "_fundingStorage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "365:23:6",
+                  "scope": 1919,
+                  "src": "411:30:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                    "typeString": "contract FundingStorage"
                   },
                   "typeName": {
-                    "id": 838,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "365:7:6",
+                    "contractScope": null,
+                    "id": 1846,
+                    "name": "FundingStorage",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1448,
+                    "src": "411:14:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                      "typeString": "contract FundingStorage"
                     }
                   },
                   "value": null,
@@ -943,11 +1149,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 841,
+                  "id": 1849,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "390:15:6",
+                  "scope": 1919,
+                  "src": "443:15:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -955,10 +1161,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 840,
+                    "id": 1848,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "390:4:6",
+                    "src": "443:4:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -969,11 +1175,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 843,
+                  "id": 1851,
                   "name": "_index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "407:11:6",
+                  "scope": 1919,
+                  "src": "460:11:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -981,10 +1187,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 842,
+                    "id": 1850,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "407:4:6",
+                    "src": "460:4:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -994,40 +1200,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "364:55:6"
+              "src": "410:62:10"
             },
             "payable": false,
             "returnParameters": {
-              "id": 845,
+              "id": 1853,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "429:0:6"
+              "src": "482:0:10"
             },
-            "scope": 900,
-            "src": "334:612:6",
+            "scope": 1920,
+            "src": "380:788:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 901,
-        "src": "184:764:6"
+        "scope": 1921,
+        "src": "184:986:10"
       }
     ],
-    "src": "0:949:6"
+    "src": "0:1171:10"
   },
   "legacyAST": {
-    "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
+    "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/ProjectMilestoneCompletionHelpersLibrary.sol",
     "exportedSymbols": {
       "ProjectMilestoneCompletionHelpersLibrary": [
-        900
+        1920
       ]
     },
-    "id": 901,
+    "id": 1921,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 827,
+        "id": 1832,
         "literals": [
           "solidity",
           "^",
@@ -1035,49 +1241,49 @@
           ".24"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:6"
+        "src": "0:24:10"
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ProjectStorageAccess.sol",
         "file": "./storage/ProjectStorageAccess.sol",
-        "id": 828,
+        "id": 1833,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 7771,
-        "src": "26:44:6",
+        "scope": 1921,
+        "sourceUnit": 8469,
+        "src": "26:44:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/libraries/storage/ContributionStorageAccess.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/libraries/storage/ContributionStorageAccess.sol",
         "file": "./storage/ContributionStorageAccess.sol",
-        "id": 829,
+        "id": 1834,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 1974,
-        "src": "71:49:6",
+        "scope": 1921,
+        "sourceUnit": 3013,
+        "src": "71:49:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/FundingVault.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/FundingVault.sol",
         "file": "../FundingVault.sol",
-        "id": 830,
+        "id": 1835,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 686,
-        "src": "121:29:6",
+        "scope": 1921,
+        "sourceUnit": 1634,
+        "src": "121:29:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/home/jordan/Projects/hyperbridge/funding-protocol/smart-contracts/ethereum/contracts/FundingStorage.sol",
+        "absolutePath": "/ude/hb/projects/protocol/packages/funding/smart-contracts/ethereum/contracts/FundingStorage.sol",
         "file": "../FundingStorage.sol",
-        "id": 831,
+        "id": 1836,
         "nodeType": "ImportDirective",
-        "scope": 901,
-        "sourceUnit": 501,
-        "src": "151:31:6",
+        "scope": 1921,
+        "sourceUnit": 1449,
+        "src": "151:31:10",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -1087,85 +1293,116 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 900,
+        "id": 1920,
         "linearizedBaseContracts": [
-          900
+          1920
         ],
         "name": "ProjectMilestoneCompletionHelpersLibrary",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 834,
+            "id": 1839,
             "libraryName": {
               "contractScope": null,
-              "id": 832,
-              "name": "ProjectStorageAccess",
+              "id": 1837,
+              "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 7770,
-              "src": "246:20:6",
+              "referencedDeclaration": 8817,
+              "src": "246:8:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ProjectStorageAccess_$7770",
-                "typeString": "library ProjectStorageAccess"
+                "typeIdentifier": "t_contract$_SafeMath_$8817",
+                "typeString": "library SafeMath"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "240:39:6",
+            "src": "240:27:10",
             "typeName": {
-              "id": 833,
-              "name": "address",
+              "id": 1838,
+              "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "271:7:6",
+              "src": "259:7:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
               }
             }
           },
           {
-            "id": 837,
+            "id": 1842,
             "libraryName": {
               "contractScope": null,
-              "id": 835,
+              "id": 1840,
+              "name": "ProjectStorageAccess",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 8468,
+              "src": "278:20:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProjectStorageAccess_$8468",
+                "typeString": "library ProjectStorageAccess"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "272:46:10",
+            "typeName": {
+              "contractScope": null,
+              "id": 1841,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "303:14:10",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
+              }
+            }
+          },
+          {
+            "id": 1845,
+            "libraryName": {
+              "contractScope": null,
+              "id": 1843,
               "name": "ContributionStorageAccess",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1973,
-              "src": "290:25:6",
+              "referencedDeclaration": 3012,
+              "src": "329:25:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ContributionStorageAccess_$1973",
+                "typeIdentifier": "t_contract$_ContributionStorageAccess_$3012",
                 "typeString": "library ContributionStorageAccess"
               }
             },
             "nodeType": "UsingForDirective",
-            "src": "284:44:6",
+            "src": "323:51:10",
             "typeName": {
-              "id": 836,
-              "name": "address",
-              "nodeType": "ElementaryTypeName",
-              "src": "320:7:6",
+              "contractScope": null,
+              "id": 1844,
+              "name": "FundingStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1448,
+              "src": "359:14:10",
               "typeDescriptions": {
-                "typeIdentifier": "t_address",
-                "typeString": "address"
+                "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                "typeString": "contract FundingStorage"
               }
             }
           },
           {
             "body": {
-              "id": 898,
+              "id": 1918,
               "nodeType": "Block",
-              "src": "429:517:6",
+              "src": "482:686:10",
               "statements": [
                 {
                   "assignments": [
-                    847
+                    1855
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 847,
+                      "id": 1855,
                       "name": "fundsRaised",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "439:16:6",
+                      "scope": 1919,
+                      "src": "492:16:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1173,10 +1410,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 846,
+                        "id": 1854,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "439:4:6",
+                        "src": "492:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1186,18 +1423,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 852,
+                  "id": 1860,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 850,
+                        "id": 1858,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "496:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "549:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1213,32 +1450,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 848,
+                        "id": 1856,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "458:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "511:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 849,
+                      "id": 1857,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "getProjectFundsRaised",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 1691,
-                      "src": "458:37:6",
+                      "referencedDeclaration": 2699,
+                      "src": "511:37:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256) view returns (uint256)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 851,
+                    "id": 1859,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1246,27 +1483,27 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "458:49:6",
+                    "src": "511:49:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "439:68:6"
+                  "src": "492:68:10"
                 },
                 {
                   "assignments": [
-                    854
+                    1862
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 854,
+                      "id": 1862,
                       "name": "percentageToSend",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "517:21:6",
+                      "scope": 1919,
+                      "src": "570:21:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1274,10 +1511,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 853,
+                        "id": 1861,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "517:4:6",
+                        "src": "570:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1287,18 +1524,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 860,
+                  "id": 1868,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 857,
+                        "id": 1865,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "588:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "641:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1306,12 +1543,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 858,
+                        "id": 1866,
                         "name": "_index",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 843,
-                        "src": "600:6:6",
+                        "referencedDeclaration": 1851,
+                        "src": "653:6:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1331,32 +1568,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 855,
+                        "id": 1863,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "541:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "594:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 856,
+                      "id": 1864,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "getTimelineMilestonePercentage",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3389,
-                      "src": "541:46:6",
+                      "referencedDeclaration": 4392,
+                      "src": "594:46:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256,uint256) view returns (uint256)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 859,
+                    "id": 1867,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1364,27 +1601,27 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "541:66:6",
+                    "src": "594:66:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "517:90:6"
+                  "src": "570:90:10"
                 },
                 {
                   "assignments": [
-                    862
+                    1870
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 862,
-                      "name": "amountToSend",
+                      "id": 1870,
+                      "name": "currentFundsReleased",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "617:17:6",
+                      "scope": 1919,
+                      "src": "670:25:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1392,10 +1629,10 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 861,
+                        "id": 1869,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
-                        "src": "617:4:6",
+                        "src": "670:4:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1405,136 +1642,18 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 868,
-                  "initialValue": {
-                    "argumentTypes": null,
-                    "commonType": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    },
-                    "id": 867,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftExpression": {
-                      "argumentTypes": null,
-                      "commonType": {
-                        "typeIdentifier": "t_uint256",
-                        "typeString": "uint256"
-                      },
-                      "id": 865,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "lValueRequested": false,
-                      "leftExpression": {
-                        "argumentTypes": null,
-                        "id": 863,
-                        "name": "fundsRaised",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 847,
-                        "src": "637:11:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_uint256",
-                          "typeString": "uint256"
-                        }
-                      },
-                      "nodeType": "BinaryOperation",
-                      "operator": "*",
-                      "rightExpression": {
-                        "argumentTypes": null,
-                        "id": 864,
-                        "name": "percentageToSend",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 854,
-                        "src": "651:16:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_uint256",
-                          "typeString": "uint256"
-                        }
-                      },
-                      "src": "637:30:6",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_uint256",
-                        "typeString": "uint256"
-                      }
-                    },
-                    "nodeType": "BinaryOperation",
-                    "operator": "/",
-                    "rightExpression": {
-                      "argumentTypes": null,
-                      "hexValue": "313030",
-                      "id": 866,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": true,
-                      "kind": "number",
-                      "lValueRequested": false,
-                      "nodeType": "Literal",
-                      "src": "670:3:6",
-                      "subdenomination": null,
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_rational_100_by_1",
-                        "typeString": "int_const 100"
-                      },
-                      "value": "100"
-                    },
-                    "src": "637:36:6",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_uint256",
-                      "typeString": "uint256"
-                    }
-                  },
-                  "nodeType": "VariableDeclarationStatement",
-                  "src": "617:56:6"
-                },
-                {
-                  "assignments": [
-                    870
-                  ],
-                  "declarations": [
-                    {
-                      "constant": false,
-                      "id": 870,
-                      "name": "developer",
-                      "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "683:17:6",
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
-                      },
-                      "typeName": {
-                        "id": 869,
-                        "name": "address",
-                        "nodeType": "ElementaryTypeName",
-                        "src": "683:7:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
-                        }
-                      },
-                      "value": null,
-                      "visibility": "internal"
-                    }
-                  ],
-                  "id": 875,
+                  "id": 1875,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 873,
+                        "id": 1873,
                         "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 841,
-                        "src": "739:10:6",
+                        "referencedDeclaration": 1849,
+                        "src": "748:10:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1550,32 +1669,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 871,
+                        "id": 1871,
                         "name": "_fundingStorage",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "703:15:6",
+                        "referencedDeclaration": 1847,
+                        "src": "698:15:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
                         }
                       },
-                      "id": 872,
+                      "id": 1872,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
-                      "memberName": "getProjectDeveloper",
+                      "memberName": "getProjectPercentageFundsReleased",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3027,
-                      "src": "703:35:6",
+                      "referencedDeclaration": 2720,
+                      "src": "698:49:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_function_internal_view$_t_address_$_t_uint256_$returns$_t_address_$bound_to$_t_address_$",
-                        "typeString": "function (address,uint256) view returns (address)"
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_uint256_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (uint256)"
                       }
                     },
-                    "id": 874,
+                    "id": 1874,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1583,129 +1702,420 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "703:47:6",
+                    "src": "698:61:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "683:67:6"
+                  "src": "670:89:10"
                 },
                 {
-                  "assignments": [
-                    877
-                  ],
-                  "declarations": [
-                    {
-                      "constant": false,
-                      "id": 877,
-                      "name": "fs",
-                      "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "760:17:6",
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_FundingStorage_$500",
-                        "typeString": "contract FundingStorage"
-                      },
-                      "typeName": {
-                        "contractScope": null,
-                        "id": 876,
-                        "name": "FundingStorage",
-                        "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 500,
-                        "src": "760:14:6",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingStorage_$500",
-                          "typeString": "contract FundingStorage"
-                        }
-                      },
-                      "value": null,
-                      "visibility": "internal"
-                    }
-                  ],
-                  "id": 881,
-                  "initialValue": {
+                  "expression": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 879,
-                        "name": "_fundingStorage",
+                        "id": 1879,
+                        "name": "_projectId",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 839,
-                        "src": "795:15:6",
+                        "referencedDeclaration": 1849,
+                        "src": "819:10:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 1882,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 1880,
+                          "name": "currentFundsReleased",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1870,
+                          "src": "831:20:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "+",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "id": 1881,
+                          "name": "percentageToSend",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1862,
+                          "src": "854:16:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "831:39:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": [
                         {
-                          "typeIdentifier": "t_address",
-                          "typeString": "address"
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       ],
-                      "id": 878,
-                      "name": "FundingStorage",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 500,
-                      "src": "780:14:6",
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1876,
+                        "name": "_fundingStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1847,
+                        "src": "769:15:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
+                        }
+                      },
+                      "id": 1878,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "setProjectPercentageFundsReleased",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3011,
+                      "src": "769:49:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_FundingStorage_$500_$",
-                        "typeString": "type(contract FundingStorage)"
+                        "typeIdentifier": "t_function_internal_nonpayable$_t_contract$_FundingStorage_$1448_$_t_uint256_$_t_uint256_$returns$__$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256,uint256)"
                       }
                     },
-                    "id": 880,
+                    "id": 1883,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
-                    "kind": "typeConversion",
+                    "kind": "functionCall",
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "780:31:6",
+                    "src": "769:102:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_FundingStorage_$500",
-                      "typeString": "contract FundingStorage"
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
                     }
                   },
-                  "nodeType": "VariableDeclarationStatement",
-                  "src": "760:51:6"
+                  "id": 1884,
+                  "nodeType": "ExpressionStatement",
+                  "src": "769:102:10"
                 },
                 {
                   "assignments": [
-                    883
+                    1886
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 883,
-                      "name": "fv",
+                      "id": 1886,
+                      "name": "amountToSend",
                       "nodeType": "VariableDeclaration",
-                      "scope": 899,
-                      "src": "821:15:6",
+                      "scope": 1919,
+                      "src": "881:17:10",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_FundingVault_$685",
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 1885,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "881:4:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1894,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "313030",
+                        "id": 1892,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "number",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "939:3:10",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        },
+                        "value": "100"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_rational_100_by_1",
+                          "typeString": "int_const 100"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1889,
+                            "name": "percentageToSend",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1862,
+                            "src": "917:16:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1887,
+                            "name": "fundsRaised",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1855,
+                            "src": "901:11:10",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          },
+                          "id": 1888,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "mul",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 8724,
+                          "src": "901:15:10",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                            "typeString": "function (uint256,uint256) pure returns (uint256)"
+                          }
+                        },
+                        "id": 1890,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "901:33:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "id": 1891,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "div",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 8748,
+                      "src": "901:37:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
+                        "typeString": "function (uint256,uint256) pure returns (uint256)"
+                      }
+                    },
+                    "id": 1893,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "901:42:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "881:62:10"
+                },
+                {
+                  "assignments": [
+                    1896
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1896,
+                      "name": "developer",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1919,
+                      "src": "953:17:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      },
+                      "typeName": {
+                        "id": 1895,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "953:7:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1901,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1899,
+                        "name": "_projectId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1849,
+                        "src": "1009:10:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1897,
+                        "name": "_fundingStorage",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1847,
+                        "src": "973:15:10",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                          "typeString": "contract FundingStorage"
+                        }
+                      },
+                      "id": 1898,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getProjectDeveloper",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 4062,
+                      "src": "973:35:10",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_internal_view$_t_contract$_FundingStorage_$1448_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_FundingStorage_$1448_$",
+                        "typeString": "function (contract FundingStorage,uint256) view returns (address)"
+                      }
+                    },
+                    "id": 1900,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "973:47:10",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "953:67:10"
+                },
+                {
+                  "assignments": [
+                    1903
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1903,
+                      "name": "fv",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 1919,
+                      "src": "1030:15:10",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_FundingVault_$1633",
                         "typeString": "contract FundingVault"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 882,
+                        "id": 1902,
                         "name": "FundingVault",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 685,
-                        "src": "821:12:6",
+                        "referencedDeclaration": 1633,
+                        "src": "1030:12:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingVault_$685",
+                          "typeIdentifier": "t_contract$_FundingVault_$1633",
                           "typeString": "contract FundingVault"
                         }
                       },
@@ -1713,7 +2123,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 890,
+                  "id": 1910,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -1723,14 +2133,14 @@
                           {
                             "argumentTypes": null,
                             "hexValue": "46756e64696e675661756c74",
-                            "id": 887,
+                            "id": 1907,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "kind": "string",
                             "lValueRequested": false,
                             "nodeType": "Literal",
-                            "src": "874:14:6",
+                            "src": "1096:14:10",
                             "subdenomination": null,
                             "typeDescriptions": {
                               "typeIdentifier": "t_stringliteral_25e77158453a461bab1099ad7b2da79bfda940c9045cbc64cbf30b89386b2d00",
@@ -1748,32 +2158,32 @@
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 885,
-                            "name": "fs",
+                            "id": 1905,
+                            "name": "_fundingStorage",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 877,
-                            "src": "852:2:6",
+                            "referencedDeclaration": 1847,
+                            "src": "1061:15:10",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_FundingStorage_$500",
+                              "typeIdentifier": "t_contract$_FundingStorage_$1448",
                               "typeString": "contract FundingStorage"
                             }
                           },
-                          "id": 886,
+                          "id": 1906,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "memberName": "getContractAddress",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 235,
-                          "src": "852:21:6",
+                          "referencedDeclaration": 1183,
+                          "src": "1061:34:10",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_string_memory_ptr_$returns$_t_address_$",
                             "typeString": "function (string memory) view external returns (address)"
                           }
                         },
-                        "id": 888,
+                        "id": 1908,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1781,7 +2191,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "852:37:6",
+                        "src": "1061:50:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1795,18 +2205,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 884,
+                      "id": 1904,
                       "name": "FundingVault",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 685,
-                      "src": "839:12:6",
+                      "referencedDeclaration": 1633,
+                      "src": "1048:12:10",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_contract$_FundingVault_$685_$",
+                        "typeIdentifier": "t_type$_t_contract$_FundingVault_$1633_$",
                         "typeString": "type(contract FundingVault)"
                       }
                     },
-                    "id": 889,
+                    "id": 1909,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1814,14 +2224,14 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "839:51:6",
+                    "src": "1048:64:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_FundingVault_$685",
+                      "typeIdentifier": "t_contract$_FundingVault_$1633",
                       "typeString": "contract FundingVault"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "821:69:6"
+                  "src": "1030:82:10"
                 },
                 {
                   "expression": {
@@ -1829,12 +2239,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 894,
+                        "id": 1914,
                         "name": "amountToSend",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 862,
-                        "src": "915:12:6",
+                        "referencedDeclaration": 1886,
+                        "src": "1137:12:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1842,12 +2252,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 895,
+                        "id": 1915,
                         "name": "developer",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 870,
-                        "src": "929:9:6",
+                        "referencedDeclaration": 1896,
+                        "src": "1151:9:10",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1867,32 +2277,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 891,
+                        "id": 1911,
                         "name": "fv",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 883,
-                        "src": "900:2:6",
+                        "referencedDeclaration": 1903,
+                        "src": "1122:2:10",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_FundingVault_$685",
+                          "typeIdentifier": "t_contract$_FundingVault_$1633",
                           "typeString": "contract FundingVault"
                         }
                       },
-                      "id": 893,
+                      "id": 1913,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "withdrawEth",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 608,
-                      "src": "900:14:6",
+                      "referencedDeclaration": 1556,
+                      "src": "1122:14:10",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
                       }
                     },
-                    "id": 896,
+                    "id": 1916,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1900,20 +2310,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "900:39:6",
+                    "src": "1122:39:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 897,
+                  "id": 1917,
                   "nodeType": "ExpressionStatement",
-                  "src": "900:39:6"
+                  "src": "1122:39:10"
                 }
               ]
             },
             "documentation": null,
-            "id": 899,
+            "id": 1919,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -1921,30 +2331,32 @@
             "name": "releaseMilestoneFunds",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 844,
+              "id": 1852,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 839,
+                  "id": 1847,
                   "name": "_fundingStorage",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "365:23:6",
+                  "scope": 1919,
+                  "src": "411:30:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                    "typeString": "contract FundingStorage"
                   },
                   "typeName": {
-                    "id": 838,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "365:7:6",
+                    "contractScope": null,
+                    "id": 1846,
+                    "name": "FundingStorage",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 1448,
+                    "src": "411:14:10",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
+                      "typeIdentifier": "t_contract$_FundingStorage_$1448",
+                      "typeString": "contract FundingStorage"
                     }
                   },
                   "value": null,
@@ -1952,11 +2364,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 841,
+                  "id": 1849,
                   "name": "_projectId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "390:15:6",
+                  "scope": 1919,
+                  "src": "443:15:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1964,10 +2376,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 840,
+                    "id": 1848,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "390:4:6",
+                    "src": "443:4:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1978,11 +2390,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 843,
+                  "id": 1851,
                   "name": "_index",
                   "nodeType": "VariableDeclaration",
-                  "scope": 899,
-                  "src": "407:11:6",
+                  "scope": 1919,
+                  "src": "460:11:10",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1990,10 +2402,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 842,
+                    "id": 1850,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "407:4:6",
+                    "src": "460:4:10",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -2003,27 +2415,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "364:55:6"
+              "src": "410:62:10"
             },
             "payable": false,
             "returnParameters": {
-              "id": 845,
+              "id": 1853,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "429:0:6"
+              "src": "482:0:10"
             },
-            "scope": 900,
-            "src": "334:612:6",
+            "scope": 1920,
+            "src": "380:788:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "internal"
           }
         ],
-        "scope": 901,
-        "src": "184:764:6"
+        "scope": 1921,
+        "src": "184:986:10"
       }
     ],
-    "src": "0:949:6"
+    "src": "0:1171:10"
   },
   "compiler": {
     "name": "solc",
@@ -2039,6 +2451,6 @@
       "transactionHash": "0x1c266ad377dce656991133e77eb3e891ae1ddbf802b4a1c279da272c7f5dbd82"
     }
   },
-  "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-26T16:56:23.251Z"
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-10-15T04:09:23.872Z"
 }

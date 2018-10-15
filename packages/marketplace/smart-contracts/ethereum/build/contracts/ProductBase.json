@@ -1,0 +1,814 @@
+{
+  "contractName": "ProductBase",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "marketplaceStorage",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060e98061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806346b3aec6146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820696444ad085e16e0a600411c8526bd01743aa924028ac184fe97c617f72d8f920029",
+  "deployedBytecode": "0x608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806346b3aec6146044575b600080fd5b348015604f57600080fd5b5060566098565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff16815600a165627a7a72305820696444ad085e16e0a600411c8526bd01743aa924028ac184fe97c617f72d8f920029",
+  "sourceMap": "119:413:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;119:413:11;;;;;;;",
+  "deployedSourceMap": "119:413:11:-;;;;;;;;;;;;;;;;;;;;;;;;485:44;;8:9:-1;5:2;;;30:1;27;20:12;5:2;485:44:11;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.24;\n\nimport \"../MarketplaceStorage.sol\";\nimport \"../libraries/storage/ProductStorageAccess.sol\";\n\ncontract ProductBase {\n\n    using ProductStorageAccess for MarketplaceStorage;\n\n    modifier onlyProductDeveloper(uint _productId) {\n        require(msg.sender == marketplaceStorage.getProductDeveloper(_productId), \"You must be the product developer to perform this action.\");\n        _;\n    }\n\n    enum Status { Inactive, Draft, Pending, Published, Rejected }\n\n    MarketplaceStorage public marketplaceStorage;\n}\n",
+  "sourcePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/product/ProductBase.sol",
+  "ast": {
+    "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/product/ProductBase.sol",
+    "exportedSymbols": {
+      "ProductBase": [
+        4466
+      ]
+    },
+    "id": 4467,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4435,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/MarketplaceStorage.sol",
+        "file": "../MarketplaceStorage.sol",
+        "id": 4436,
+        "nodeType": "ImportDirective",
+        "scope": 4467,
+        "sourceUnit": 748,
+        "src": "26:35:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/libraries/storage/ProductStorageAccess.sol",
+        "file": "../libraries/storage/ProductStorageAccess.sol",
+        "id": 4437,
+        "nodeType": "ImportDirective",
+        "scope": 4467,
+        "sourceUnit": 4252,
+        "src": "62:55:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4466,
+        "linearizedBaseContracts": [
+          4466
+        ],
+        "name": "ProductBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 4440,
+            "libraryName": {
+              "contractScope": null,
+              "id": 4438,
+              "name": "ProductStorageAccess",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4251,
+              "src": "153:20:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProductStorageAccess_$4251",
+                "typeString": "library ProductStorageAccess"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "147:50:11",
+            "typeName": {
+              "contractScope": null,
+              "id": 4439,
+              "name": "MarketplaceStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 747,
+              "src": "178:18:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                "typeString": "contract MarketplaceStorage"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 4456,
+              "nodeType": "Block",
+              "src": "250:162:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 4451,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 4445,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5754,
+                            "src": "268:3:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 4446,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "268:10:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 4449,
+                              "name": "_productId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4442,
+                              "src": "321:10:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 4447,
+                              "name": "marketplaceStorage",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4465,
+                              "src": "282:18:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                                "typeString": "contract MarketplaceStorage"
+                              }
+                            },
+                            "id": 4448,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "getProductDeveloper",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1640,
+                            "src": "282:38:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$_t_contract$_MarketplaceStorage_$747_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_MarketplaceStorage_$747_$",
+                              "typeString": "function (contract MarketplaceStorage,uint256) view returns (address)"
+                            }
+                          },
+                          "id": 4450,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "282:50:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "268:64:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "596f75206d757374206265207468652070726f6475637420646576656c6f70657220746f20706572666f726d207468697320616374696f6e2e",
+                        "id": 4452,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "334:59:11",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c36c26de4e177d9c251d2d8f2fbceab2172f5a8a92be28076b9ca81c234239d3",
+                          "typeString": "literal_string \"You must be the product developer to perform this action.\""
+                        },
+                        "value": "You must be the product developer to perform this action."
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c36c26de4e177d9c251d2d8f2fbceab2172f5a8a92be28076b9ca81c234239d3",
+                          "typeString": "literal_string \"You must be the product developer to perform this action.\""
+                        }
+                      ],
+                      "id": 4444,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        5757,
+                        5758
+                      ],
+                      "referencedDeclaration": 5758,
+                      "src": "260:7:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4453,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "260:134:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4454,
+                  "nodeType": "ExpressionStatement",
+                  "src": "260:134:11"
+                },
+                {
+                  "id": 4455,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "404:1:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4457,
+            "name": "onlyProductDeveloper",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 4443,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4442,
+                  "name": "_productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4457,
+                  "src": "233:15:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4441,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "233:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "232:17:11"
+            },
+            "src": "203:209:11",
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "ProductBase.Status",
+            "id": 4463,
+            "members": [
+              {
+                "id": 4458,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "432:8:11"
+              },
+              {
+                "id": 4459,
+                "name": "Draft",
+                "nodeType": "EnumValue",
+                "src": "442:5:11"
+              },
+              {
+                "id": 4460,
+                "name": "Pending",
+                "nodeType": "EnumValue",
+                "src": "449:7:11"
+              },
+              {
+                "id": 4461,
+                "name": "Published",
+                "nodeType": "EnumValue",
+                "src": "458:9:11"
+              },
+              {
+                "id": 4462,
+                "name": "Rejected",
+                "nodeType": "EnumValue",
+                "src": "469:8:11"
+              }
+            ],
+            "name": "Status",
+            "nodeType": "EnumDefinition",
+            "src": "418:61:11"
+          },
+          {
+            "constant": false,
+            "id": 4465,
+            "name": "marketplaceStorage",
+            "nodeType": "VariableDeclaration",
+            "scope": 4466,
+            "src": "485:44:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+              "typeString": "contract MarketplaceStorage"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 4464,
+              "name": "MarketplaceStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 747,
+              "src": "485:18:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                "typeString": "contract MarketplaceStorage"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4467,
+        "src": "119:413:11"
+      }
+    ],
+    "src": "0:533:11"
+  },
+  "legacyAST": {
+    "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/product/ProductBase.sol",
+    "exportedSymbols": {
+      "ProductBase": [
+        4466
+      ]
+    },
+    "id": 4467,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4435,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".24"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:11"
+      },
+      {
+        "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/MarketplaceStorage.sol",
+        "file": "../MarketplaceStorage.sol",
+        "id": 4436,
+        "nodeType": "ImportDirective",
+        "scope": 4467,
+        "sourceUnit": 748,
+        "src": "26:35:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/ude/hb/projects/protocol/packages/marketplace/smart-contracts/ethereum/contracts/libraries/storage/ProductStorageAccess.sol",
+        "file": "../libraries/storage/ProductStorageAccess.sol",
+        "id": 4437,
+        "nodeType": "ImportDirective",
+        "scope": 4467,
+        "sourceUnit": 4252,
+        "src": "62:55:11",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4466,
+        "linearizedBaseContracts": [
+          4466
+        ],
+        "name": "ProductBase",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 4440,
+            "libraryName": {
+              "contractScope": null,
+              "id": 4438,
+              "name": "ProductStorageAccess",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4251,
+              "src": "153:20:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ProductStorageAccess_$4251",
+                "typeString": "library ProductStorageAccess"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "147:50:11",
+            "typeName": {
+              "contractScope": null,
+              "id": 4439,
+              "name": "MarketplaceStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 747,
+              "src": "178:18:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                "typeString": "contract MarketplaceStorage"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 4456,
+              "nodeType": "Block",
+              "src": "250:162:11",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        "id": 4451,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 4445,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5754,
+                            "src": "268:3:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 4446,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "sender",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "268:10:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 4449,
+                              "name": "_productId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4442,
+                              "src": "321:10:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": null,
+                              "id": 4447,
+                              "name": "marketplaceStorage",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4465,
+                              "src": "282:18:11",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                                "typeString": "contract MarketplaceStorage"
+                              }
+                            },
+                            "id": 4448,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "memberName": "getProductDeveloper",
+                            "nodeType": "MemberAccess",
+                            "referencedDeclaration": 1640,
+                            "src": "282:38:11",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_function_internal_view$_t_contract$_MarketplaceStorage_$747_$_t_uint256_$returns$_t_address_$bound_to$_t_contract$_MarketplaceStorage_$747_$",
+                              "typeString": "function (contract MarketplaceStorage,uint256) view returns (address)"
+                            }
+                          },
+                          "id": 4450,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "functionCall",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "282:50:11",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "src": "268:64:11",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "596f75206d757374206265207468652070726f6475637420646576656c6f70657220746f20706572666f726d207468697320616374696f6e2e",
+                        "id": 4452,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "334:59:11",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_c36c26de4e177d9c251d2d8f2fbceab2172f5a8a92be28076b9ca81c234239d3",
+                          "typeString": "literal_string \"You must be the product developer to perform this action.\""
+                        },
+                        "value": "You must be the product developer to perform this action."
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_c36c26de4e177d9c251d2d8f2fbceab2172f5a8a92be28076b9ca81c234239d3",
+                          "typeString": "literal_string \"You must be the product developer to perform this action.\""
+                        }
+                      ],
+                      "id": 4444,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        5757,
+                        5758
+                      ],
+                      "referencedDeclaration": 5758,
+                      "src": "260:7:11",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4453,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "260:134:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4454,
+                  "nodeType": "ExpressionStatement",
+                  "src": "260:134:11"
+                },
+                {
+                  "id": 4455,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "404:1:11"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4457,
+            "name": "onlyProductDeveloper",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 4443,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4442,
+                  "name": "_productId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4457,
+                  "src": "233:15:11",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4441,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "233:4:11",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "232:17:11"
+            },
+            "src": "203:209:11",
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "ProductBase.Status",
+            "id": 4463,
+            "members": [
+              {
+                "id": 4458,
+                "name": "Inactive",
+                "nodeType": "EnumValue",
+                "src": "432:8:11"
+              },
+              {
+                "id": 4459,
+                "name": "Draft",
+                "nodeType": "EnumValue",
+                "src": "442:5:11"
+              },
+              {
+                "id": 4460,
+                "name": "Pending",
+                "nodeType": "EnumValue",
+                "src": "449:7:11"
+              },
+              {
+                "id": 4461,
+                "name": "Published",
+                "nodeType": "EnumValue",
+                "src": "458:9:11"
+              },
+              {
+                "id": 4462,
+                "name": "Rejected",
+                "nodeType": "EnumValue",
+                "src": "469:8:11"
+              }
+            ],
+            "name": "Status",
+            "nodeType": "EnumDefinition",
+            "src": "418:61:11"
+          },
+          {
+            "constant": false,
+            "id": 4465,
+            "name": "marketplaceStorage",
+            "nodeType": "VariableDeclaration",
+            "scope": 4466,
+            "src": "485:44:11",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+              "typeString": "contract MarketplaceStorage"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 4464,
+              "name": "MarketplaceStorage",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 747,
+              "src": "485:18:11",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_MarketplaceStorage_$747",
+                "typeString": "contract MarketplaceStorage"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 4467,
+        "src": "119:413:11"
+      }
+    ],
+    "src": "0:533:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-10-15T04:24:06.459Z"
+}
