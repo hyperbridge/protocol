@@ -21,7 +21,140 @@ let state = {
   provider: null,
   fromAddress: null,
   toAddress: null,
-  contracts: {}
+  contracts: {
+    MarketplaceStorage: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/MarketplaceStorage.json'),
+      address: null
+    },
+    Administration: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Administration.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductStorageAccess: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductStorageAccess.json'),
+      address: null
+    },
+    AdministrationStorageAccess: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/AdministrationStorageAccess.json'),
+      address: null
+    },
+    Bytes32Utils: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Bytes32Utils.json'),
+      address: null
+    },
+    BytesUtils: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/BytesUtils.json'),
+      address: null
+    },
+    StringUtils: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/StringUtils.json'),
+      address: null
+    },
+    ProductRegistration: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductRegistration.json'),
+      address: null,
+      links: [{
+        name: 'BytesUtils',
+        address: null
+      }, {
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductLanguageSupport: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductLanguageSupport.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductSystemRequirement: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductSystemRequirement.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductPricePlan: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductPricePlan.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductVersion: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductVersion.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductVersionVoting: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductVersionVoting.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    ProductPurchase: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProductPurchase.json'),
+      address: null,
+      links: [{
+        name: 'StringUtils',
+        address: null
+      }, {
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    },
+    Developer: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Developer.json'),
+      address: null,
+      links: [{
+        name: 'MarketplaceStorage',
+        address: null
+      }]
+    }
+  }
 };
 exports.state = state;
 

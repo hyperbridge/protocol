@@ -1,9 +1,7 @@
 {
     "name": "hyperbridge-marketplace-protocol",
-    "description": "Hyperbridge Marketplace Protocol",
     "version": "1.0.3",
-    "repository": "git@github.com:hyperbridge/protocol.git",
-    "license": "SEE LICENSE IN LICENSE.md",
+    "description": "Hyperbridge Marketplace Protocol",
     "main": "./index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,12 +10,20 @@
         "build": "cd smart-contracts/ethereum && ./node_modules/.bin/truffle compile && cd ../../ && npm run build-api",
         "format": "yarn run prettier --write 'test-client/**/*.js'"
     },
-    "dependencies": {
-        "truffle-contract": "^3.0.5",
-        "truffle-hdwallet-provider": "0.0.6"
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/hyperbridge/protocol.git"
     },
+    "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
-        "node": "8.11.1"
+        "node": "~8.11.1"
+    },
+    "dependencies": {
+        "fs-extra": "^7.0.0",
+        "solc": "^0.4.23",
+        "truffle-contract": "^3.0.5",
+        "truffle-hdwallet-provider": "0.0.6",
+        "web3": "^1.0.0-beta.26"
     },
     "devDependencies": {
         "@babel/cli": "^7.1.0",
@@ -32,7 +38,12 @@
         "@babel/polyfill": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
         "@babel/preset-stage-1": "^7.0.0",
-        "@babel/register": "^7.0.0"
+        "@babel/register": "^7.0.0",
+        "babel-plugin-transform-es3-member-expression-literals": "6.22.0",
+        "babel-plugin-transform-es3-property-literals": "6.22.0",
+        "babel-plugin-transform-object-rest-spread": "6.26.0",
+        "eslint-plugin-prettier": "^2.6.0",
+        "prettier": "1.14.2"
     },
     "gitHead": "a8a1e4aeb43fd632e886fdfc59f217f6a2d0da7b"
 }
