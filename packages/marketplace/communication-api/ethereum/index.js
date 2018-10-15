@@ -68,6 +68,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductLanguageSupport: {
@@ -79,6 +82,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductSystemRequirement: {
@@ -90,6 +96,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductPricePlan: {
@@ -101,6 +110,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductVersion: {
@@ -112,6 +124,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductVersionVoting: {
@@ -123,6 +138,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductPurchase: {
@@ -137,6 +155,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         Developer: {

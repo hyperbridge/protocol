@@ -80,7 +80,8 @@ let state = {
       }, {
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductLanguageSupport: {
       contract: null,
@@ -90,7 +91,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductSystemRequirement: {
       contract: null,
@@ -100,7 +102,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductPricePlan: {
       contract: null,
@@ -110,7 +113,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductVersion: {
       contract: null,
@@ -120,7 +124,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductVersionVoting: {
       contract: null,
@@ -130,7 +135,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductPurchase: {
       contract: null,
@@ -143,7 +149,8 @@ let state = {
       }, {
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     Developer: {
       contract: null,
