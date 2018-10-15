@@ -1,4 +1,4 @@
-import * as truffleContract from 'truffle-contract'
+import truffleContract from 'truffle-contract'
 import * as abiDecoder from './lib/abi-decoder'
 
 // const provider = new window.Web3.providers.HttpProvider("http://localhost:8545")
@@ -7,6 +7,7 @@ import * as abiDecoder from './lib/abi-decoder'
 
 
 export let state = {
+    provider: null,
     fromAddress: null,
     toAddress: null,
     contracts: {
@@ -188,7 +189,7 @@ export let state = {
 
 const buildContract = (meta, options) => {
     const contract = truffleContract(meta)
-    contract.setProvider(provider)
+    contract.setProvider(state.provider)
 
     contract.defaults({
         from: options.from,
@@ -207,7 +208,8 @@ const buildContract = (meta, options) => {
     return contract
 }
 
-export const init = (fromAddress, toAddress) => {
+export const init = (provider, fromAddress, toAddress) => {
+    state.provider = provider
     state.fromAddress = fromAddress
     state.toAddress = toAddress
 }
