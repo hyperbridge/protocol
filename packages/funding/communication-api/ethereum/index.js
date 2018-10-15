@@ -39,7 +39,10 @@ export let state = {
             contract: null,
             deployed: null,
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/FundingVault.json'),
-            address: null
+            address: null,
+            params: [
+                'FundingStorage'
+            ]
         },
         Developer: {
             contract: null,
@@ -50,6 +53,10 @@ export let state = {
                 {
                     name: 'DeveloperStorageAccess', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         Contribution: {
@@ -64,6 +71,10 @@ export let state = {
                 {
                     name: 'ProjectStorageAccess', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         ProjectBase: {
@@ -81,13 +92,20 @@ export let state = {
                 {
                     name: 'ContributionStorageAccess', address: null
                 }
+            ],
+            params: [
+                false
             ]
         },
         ProjectTimeline: {
             contract: null,
             deployed: null,
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProjectTimeline.json'),
-            address: null
+            address: null,
+            params: [
+                'FundingStorage',
+                false
+            ]
         },
         ProjectTimelineHelpersLibrary: {
             contract: null,
@@ -98,6 +116,10 @@ export let state = {
                 {
                     name: 'ProjectStorageAccess', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         ProjectTimelineProposal: {
@@ -109,6 +131,10 @@ export let state = {
                 {
                     name: 'ProjectTimelineHelpersLibrary', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         ProjectContributionTierHelpersLibrary: {
@@ -131,6 +157,10 @@ export let state = {
                 {
                     name: 'ProjectTimelineHelpersLibrary', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         ProjectRegistrationHelpersLibrary: {
@@ -162,6 +192,10 @@ export let state = {
                 {
                     name: 'ProjectContributionTierHelpersLibrary', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
         CurationStorageAccess: {
@@ -182,6 +216,10 @@ export let state = {
                 {
                     name: 'ProjectStorageAccess', address: null
                 }
+            ],
+            params: [
+                'FundingStorage',
+                false
             ]
         },
     }

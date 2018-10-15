@@ -21,6 +21,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
         ProductStorageAccess: {
@@ -145,6 +148,9 @@ export let state = {
                 {
                     name: 'MarketplaceStorage', address: null
                 }
+            ],
+            params: [
+                'MarketplaceStorage'
             ]
         },
     }

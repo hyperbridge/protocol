@@ -36,7 +36,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     },
     ProductStorageAccess: {
       contract: null,
@@ -152,7 +153,8 @@ let state = {
       links: [{
         name: 'MarketplaceStorage',
         address: null
-      }]
+      }],
+      params: ['MarketplaceStorage']
     }
   }
 };

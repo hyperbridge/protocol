@@ -52,7 +52,8 @@ let state = {
       contract: null,
       deployed: null,
       meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/FundingVault.json'),
-      address: null
+      address: null,
+      params: ['FundingStorage']
     },
     Developer: {
       contract: null,
@@ -62,7 +63,8 @@ let state = {
       links: [{
         name: 'DeveloperStorageAccess',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     Contribution: {
       contract: null,
@@ -75,7 +77,8 @@ let state = {
       }, {
         name: 'ProjectStorageAccess',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     ProjectBase: {
       contract: null,
@@ -91,13 +94,15 @@ let state = {
       }, {
         name: 'ContributionStorageAccess',
         address: null
-      }]
+      }],
+      params: [false]
     },
     ProjectTimeline: {
       contract: null,
       deployed: null,
       meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProjectTimeline.json'),
-      address: null
+      address: null,
+      params: ['FundingStorage', false]
     },
     ProjectTimelineHelpersLibrary: {
       contract: null,
@@ -107,7 +112,8 @@ let state = {
       links: [{
         name: 'ProjectStorageAccess',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     ProjectTimelineProposal: {
       contract: null,
@@ -117,7 +123,8 @@ let state = {
       links: [{
         name: 'ProjectTimelineHelpersLibrary',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     ProjectContributionTierHelpersLibrary: {
       contract: null,
@@ -137,7 +144,8 @@ let state = {
       links: [{
         name: 'ProjectTimelineHelpersLibrary',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     ProjectRegistrationHelpersLibrary: {
       contract: null,
@@ -166,7 +174,8 @@ let state = {
       }, {
         name: 'ProjectContributionTierHelpersLibrary',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     },
     CurationStorageAccess: {
       contract: null,
@@ -185,7 +194,8 @@ let state = {
       }, {
         name: 'ProjectStorageAccess',
         address: null
-      }]
+      }],
+      params: ['FundingStorage', false]
     }
   }
 };

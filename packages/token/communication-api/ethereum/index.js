@@ -51,6 +51,13 @@ export let state = {
                 {
                     name: 'TokenLib', address: null
                 }
+            ],
+            params: [
+                'Hyperbridge',
+                'HBX',
+                18,
+                'EternalStorage',
+                '1.0'
             ]
         }
     }
