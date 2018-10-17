@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "build-api": "rm -rf build && mkdir build && cp -R communication-api/ build/communication-api/ && ./node_modules/.bin/babel communication-api --out-dir build/communication-api",
-    "build": "cd smart-contracts/ethereum && ./node_modules/.bin/truffle compile && cd ../../ && npm run build-api",
+    "build": "cd smart-contracts/ethereum && ./node_modules/.bin/truffle compile && cd ../../ && npm i && npm run build-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "SEE LICENSE IN LICENSE.md",

@@ -2,7 +2,7 @@
   "name": "hyperbridge-protocol",
   "version": "1.0.0-alpha.1",
   "scripts": {
-    "publish": "cd packages/funding && npm run build && cd ../marketplace && npm run build && cd ../token && npm run build && cd ../../ && lerna publish"
+    "publish": "cd packages/funding && npm i && npm run build && cd ../marketplace && npm i && npm run build && cd ../token && npm i && npm run build && cd ../reserve && npm i && npm run build && cd ../../ && lerna publish"
   },
   "devDependencies": {
     "lerna": "^3.4.3"
