@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-token",
-  "version": "1.0.6",
+  "version": "1.0.10",
   "description": "Hyperbridge Token",
   "main": "./index.js",
   "scripts": {
