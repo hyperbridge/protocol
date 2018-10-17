@@ -1,0 +1,38 @@
+{
+  "name": "hyperbridge-reserve",
+  "version": "1.0.6",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyperbridge/protocol.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyperbridge/protocol/issues"
+  },
+  "homepage": "https://github.com/hyperbridge/protocol#readme",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-bignumber": "^2.0.2",
+    "hyperbridge-token": "^1.0.6",
+    "openzeppelin-solidity": "1.10.0"
+  },
+  "devDependencies": {
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.23.0"
+  },
+  "gitHead": "a8a1e4aeb43fd632e886fdfc59f217f6a2d0da7b"
+}

@@ -80,23 +80,6 @@ let state = {
       }],
       params: ['FundingStorage', false]
     },
-    ProjectBase: {
-      contract: null,
-      deployed: null,
-      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/ProjectBase.json'),
-      address: null,
-      links: [{
-        name: 'ProjectStorageAccess',
-        address: null
-      }, {
-        name: 'DeveloperStorageAccess',
-        address: null
-      }, {
-        name: 'ContributionStorageAccess',
-        address: null
-      }],
-      params: [false]
-    },
     ProjectTimeline: {
       contract: null,
       deployed: null,
