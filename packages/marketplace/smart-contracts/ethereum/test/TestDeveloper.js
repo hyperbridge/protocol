@@ -25,6 +25,8 @@ contract('Developer', function(accounts) {
 
     it("should be able to create a developer", async () => {
         const developerName = "Hyperbridge";
+        const developerAddress = accounts[0];
+        const expectedDeveloperId = 1;
         let developerId;
 
         try {
@@ -34,15 +36,16 @@ contract('Developer', function(accounts) {
                 }
             });
 
-            await developerContract.createDeveloper(developerName, { from: accounts[0] });
+            await developerContract.createDeveloper(developerName, { from: developerAddress });
 
             watcher.stopWatching();
 
             const createdDeveloper = await developerContract.getDeveloper(developerId);
 
             assert.notEqual(createdDeveloper[0].toNumber(), 0, "Developer ID 0 is reserved.");
+            assert.equal(createdDeveloper[0].toNumber(), expectedDeveloperId, "Developer ID should be 1.");
             assert.equal(createdDeveloper[0].toNumber(), developerId, "Developer ID is incorrect.");
-            assert.equal(createdDeveloper[1], accounts[0], "Developer address is incorrect.");
+            assert.equal(createdDeveloper[1], developerAddress, "Developer address is incorrect.");
             assert.equal(createdDeveloper[2], developerName, "Developer name is incorrect.");
             assert.equal(createdDeveloper[3].length, 0, "Developer should not own any projects upon initialization.");
         } catch (e) {
@@ -52,13 +55,100 @@ contract('Developer', function(accounts) {
     });
 
     it("should not be able to create a second developer from the same address.", async () => {
-        const newDeveloperName = "Hyperbridge2";
+        const newDeveloperName = "Hyperbridge";
 
         try {
             await developerContract.createDeveloper(newDeveloperName, { from: accounts[0] });
             assert.fail();
         } catch (e) {
             console.log(e.message);
+        }
+    });
+
+    it("should be able to create a second developer", async () => {
+        const developerName = "Hyperbridge";
+        const developerAddress = accounts[1];
+        const expectedDeveloperId = 2;
+        let developerId;
+
+        try {
+            let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
+                if (!error) {
+                    developerId = result.args.developerId.toNumber();
+                }
+            });
+
+            await developerContract.createDeveloper(developerName, { from: developerAddress });
+
+            watcher.stopWatching();
+
+            const createdDeveloper = await developerContract.getDeveloper(developerId);
+
+            assert.equal(createdDeveloper[0].toNumber(), developerId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[0].toNumber(), expectedDeveloperId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[1], developerAddress, "Developer address is incorrect.");
+            assert.equal(createdDeveloper[2], developerName, "Developer name is incorrect.");
+        } catch (e) {
+            console.log(e.message);
+            assert.fail();
+        }
+    });
+
+    it("should be able to create a third developer", async () => {
+        const developerName = "Hyperbridge";
+        const developerAddress = accounts[2];
+        const expectedDeveloperId = 3;
+        let developerId;
+
+        try {
+            let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
+                if (!error) {
+                    developerId = result.args.developerId.toNumber();
+                }
+            });
+
+            await developerContract.createDeveloper(developerName, { from: developerAddress });
+
+            watcher.stopWatching();
+
+            const createdDeveloper = await developerContract.getDeveloper(developerId);
+
+            assert.equal(createdDeveloper[0].toNumber(), developerId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[0].toNumber(), expectedDeveloperId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[1], developerAddress, "Developer address is incorrect.");
+            assert.equal(createdDeveloper[2], developerName, "Developer name is incorrect.");
+        } catch (e) {
+            console.log(e.message);
+            assert.fail();
+        }
+    });
+
+    it("should be able to create a forth developer", async () => {
+        const developerName = "Hyperbridge";
+        const developerAddress = accounts[3];
+        const expectedDeveloperId = 4;
+        let developerId;
+
+        try {
+            let watcher = developerContract.DeveloperCreated().watch(function (error, result) {
+                if (!error) {
+                    developerId = result.args.developerId.toNumber();
+                }
+            });
+
+            await developerContract.createDeveloper(developerName, { from: developerAddress });
+
+            watcher.stopWatching();
+
+            const createdDeveloper = await developerContract.getDeveloper(developerId);
+
+            assert.equal(createdDeveloper[0].toNumber(), developerId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[0].toNumber(), expectedDeveloperId, "Developer ID is incorrect.");
+            assert.equal(createdDeveloper[1], developerAddress, "Developer address is incorrect.");
+            assert.equal(createdDeveloper[2], developerName, "Developer name is incorrect.");
+        } catch (e) {
+            console.log(e.message);
+            assert.fail();
         }
     });
 });
