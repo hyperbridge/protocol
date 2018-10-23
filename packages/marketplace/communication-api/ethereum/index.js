@@ -244,12 +244,13 @@ export const deployContract = async (contractName, links, params) => {
         //data = data.replace(new RegExp('__' + link.name + '_+', 'g'), link.address.replace('0x', ''))
     }
 
-    return await new Promise((resolve) => {
+    return await new Promise((resolve, reject) => {
         contract.new(...params).then((deployed) => {
             state.contracts[contractName].deployed = deployed
+            state.contracts[contractName].address = deployed.address
 
             resolve(deployed)
-        })
+        }).catch(reject)
     })
 }
 
