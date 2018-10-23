@@ -26,6 +26,12 @@ export let state = {
                 'MarketplaceStorage'
             ]
         },
+        DeveloperStorageAccess: {
+            contract: null,
+            deployed: null,
+            meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/DeveloperStorageAccess.json'),
+            address: null
+        },
         ProductStorageAccess: {
             contract: null,
             deployed: null,
@@ -166,6 +172,9 @@ export let state = {
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Developer.json'),
             address: null,
             links: [
+                {
+                    name: 'DeveloperStorageAccess', address: null
+                },
                 {
                     name: 'MarketplaceStorage', address: null
                 }
