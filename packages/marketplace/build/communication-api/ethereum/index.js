@@ -39,6 +39,12 @@ let state = {
       }],
       params: ['MarketplaceStorage']
     },
+    DeveloperStorageAccess: {
+      contract: null,
+      deployed: null,
+      meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/DeveloperStorageAccess.json'),
+      address: null
+    },
     ProductStorageAccess: {
       contract: null,
       deployed: null,
@@ -158,6 +164,9 @@ let state = {
       meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/Developer.json'),
       address: null,
       links: [{
+        name: 'DeveloperStorageAccess',
+        address: null
+      }, {
         name: 'MarketplaceStorage',
         address: null
       }],
@@ -238,11 +247,12 @@ function () {
       contract.link(link.name, link.address); //data = data.replace(new RegExp('__' + link.name + '_+', 'g'), link.address.replace('0x', ''))
     }
 
-    return yield new Promise(resolve => {
+    return yield new Promise((resolve, reject) => {
       contract.new(...params).then(deployed => {
         state.contracts[contractName].deployed = deployed;
+        state.contracts[contractName].address = deployed.address;
         resolve(deployed);
-      });
+      }).catch(reject);
     });
   });
 

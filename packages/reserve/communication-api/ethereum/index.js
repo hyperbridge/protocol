@@ -15,7 +15,12 @@ export let state = {
             contract: null,
             deployed: null,
             meta: require(__dirname + '/../../../smart-contracts/ethereum/build/contracts/TokenSale.json'),
-            address: null
+            address: null,
+            links: [],
+            // params: [
+            //     // TODO
+            //     uint256 _rate, address _wallet, ERC20 _token, address _tokenWallet, uint256 _cap, uint256 _startTime, uint256 _endTime
+            // ]
         },
     }
 }
