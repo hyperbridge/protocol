@@ -5,7 +5,7 @@
 
   <br>
 
-  ![build](https://travis-ci.org/hyperbridge/protocol.svg?branch=master) [![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/hyperbridge/protocol/blob/master/LICENSE.md) [![](https://img.shields.io/badge/whitepaper-v2.0.0-lightgrey.svg)](https://hyperbridge.org/whitepaper) [![Gitter chat](https://img.shields.io/gitter/room/Hyperbridge/Lobby.svg)](https://gitter.im/Hyperbridge/Lobby) [![](https://img.shields.io/badge/telegram-group-blue.svg)](https://t.me/hyperbridgechat) [![](https://img.shields.io/badge/discord-server-brightgreen.svg)](https://discord.gg/wVMTjEb) [![](https://img.shields.io/badge/twitter-%40hyperbridge-blue.svg)](https://twitter.com/@hyperbridge) [![](https://img.shields.io/badge/e--mail-hello%40hyperbridge.org-brightgreen.svg)](mailto:hello@hyperbridge.org) [![Greenkeeper badge](https://badges.greenkeeper.io/hyperbridge/protocol.svg)](https://greenkeeper.io/)
+  [![Discord][discord-shield]][discord] ![build](https://travis-ci.org/hyperbridge/protocol.svg?branch=master) [![license](https://img.shields.io/hexpm/l/plug.svg)](https://github.com/hyperbridge/protocol/blob/master/LICENSE.md) [![](https://img.shields.io/badge/whitepaper-v2.0.0-lightgrey.svg)](https://hyperbridge.org/whitepaper) [![Gitter chat](https://img.shields.io/gitter/room/Hyperbridge/Lobby.svg)](https://gitter.im/Hyperbridge/Lobby) [![](https://img.shields.io/badge/telegram-group-blue.svg)](https://t.me/hyperbridgechat) [![](https://img.shields.io/badge/discord-server-brightgreen.svg)](https://discord.gg/wVMTjEb) [![](https://img.shields.io/badge/twitter-%40hyperbridge-blue.svg)](https://twitter.com/@hyperbridge) [![](https://img.shields.io/badge/e--mail-hello%40hyperbridge.org-brightgreen.svg)](mailto:hello@hyperbridge.org) [![Greenkeeper badge](https://badges.greenkeeper.io/hyperbridge/protocol.svg)](https://greenkeeper.io/)
 
   <h1><code>Protocol</code> for Hyperbridge</h1>
 </div>
@@ -22,9 +22,9 @@ These are the protocol specification for the Hyperbridge ecosystem, currently bu
 - 💻 [Web Client](https://github.com/hyperbridge/blockhub-web-client)
 - 💻 [Desktop Client](https://github.com/hyperbridge/blockhub-desktop-client)
 - 🛡 [Node Operator](https://github.com/hyperbridge/blockhub-node-operator)
-- 🔗 [Token](https://github.com/hyperbridge/protocol/packages/token)
-- 🔗 [Funding Protocol](https://github.com/hyperbridge/protocol/packages/funding)
-- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/protocol/packages/marketplace)
+- 🔗 [Token](https://github.com/hyperbridge/protocol/tree/master/packages/token)
+- 🔗 [Funding Protocol](https://github.com/hyperbridge/protocol/tree/master/packages/funding)
+- 🔗 [Marketplace Protocol](https://github.com/hyperbridge/protocol/tree/master/packages/marketplace)
 
 ## Intro
 
