@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-funding-protocol",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Hyperbridge Funding Protocol",
   "main": "./index.js",
   "scripts": {
