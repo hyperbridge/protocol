@@ -44,7 +44,8 @@ const buildContract = (meta, options) => {
   contract.setProvider(state.provider);
   contract.defaults({
     from: options.from,
-    gas: options.gas
+    gas: options.gas,
+    gasPrice: options.gasPrice
   });
   contract.setNetwork('*'); // dirty hack for web3@1.0.0 support for localhost testrpc, see https://github.com/trufflesuite/truffle-contract/issues/56#issuecomment-331084530
 
@@ -73,7 +74,8 @@ function () {
     return yield new Promise((resolve, reject) => {
       const contract = state.contracts[contractName].contract = buildContract(state.contracts[contractName].meta, {
         from: state.fromAddress,
-        gas: 6500000
+        gas: 6500000,
+        gasPrice: 10e9
       });
       contract.at(address).then(deployed => {
         state.contracts[contractName].deployed = deployed;
@@ -97,7 +99,8 @@ function () {
     console.log('[Token] Deploying contract for: ' + contractName);
     const contract = state.contracts[contractName].contract = buildContract(state.contracts[contractName].meta, {
       from: state.fromAddress,
-      gas: 6500000
+      gas: 6500000,
+      gasPrice: 10e9
     });
 
     if (!links) {
