@@ -211,7 +211,8 @@ const buildContract = (meta, options) => {
 
     contract.defaults({
         from: options.from,
-        gas: options.gas
+        gas: options.gas,
+        gasPrice: options.gasPrice
     })
 
     contract.setNetwork('*')
@@ -238,7 +239,8 @@ export const setContractAddress = async (contractName, address) => {
     return await new Promise((resolve, reject) => {
         const contract = state.contracts[contractName].contract = buildContract(state.contracts[contractName].meta, {
             from: state.fromAddress,
-            gas: 6500000
+            gas: 6500000,
+            gasPrice: 10e9
         })
 
         contract.at(address).then((deployed) => {
@@ -255,7 +257,8 @@ export const deployContract = async (contractName, links, params) => {
 
     const contract = state.contracts[contractName].contract = buildContract(state.contracts[contractName].meta, {
         from: state.fromAddress,
-        gas: 6500000
+        gas: 6500000,
+        gasPrice: 10e9
     })
 
     if (!links) {
