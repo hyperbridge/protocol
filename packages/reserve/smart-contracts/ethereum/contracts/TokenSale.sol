@@ -31,6 +31,10 @@ contract TokenSale is
         rate = _rate;
     }
 
+    function changeCap(uint256 _cap) public onlyOwner {
+        cap = _cap;
+    }
+
     function changeTokenWallet(address _tokenWallet) public onlyOwner {
         tokenWallet = _tokenWallet;
     }
