@@ -1,6 +1,6 @@
 {
   "name": "hyperbridge-reserve",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Hyperbridge Reserve",
   "main": "./index.js",
   "scripts": {
