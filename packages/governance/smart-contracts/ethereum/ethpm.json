@@ -1,0 +1,16 @@
+{
+    "package_name": "nat",
+    "version": "0.0.1",
+    "description": "Contracts for NAT",
+    "authors": [
+        "Eric Muyser <eric@muyser.com>"
+    ],
+    "keywords": [
+        "ethereum",
+        "nat"
+    ],
+    "dependencies": {
+        "owned": "^0.0.1"
+    },
+    "license": "MIT"
+}
