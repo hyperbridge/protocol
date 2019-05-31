@@ -1,6 +1,6 @@
 {
     "name": "hyperbridge-marketplace-protocol",
-    "version": "1.0.13",
+    "version": "1.0.14",
     "description": "Hyperbridge Marketplace Protocol",
     "main": "./index.js",
     "scripts": {
