@@ -16,7 +16,7 @@
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "engines": {
-        "node": "~8.11.1"
+        "node": ">=8.11.1"
     },
     "dependencies": {
         "fs-extra": "^7.0.0",
