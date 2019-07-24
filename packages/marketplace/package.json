@@ -1,7 +1,10 @@
 {
-    "name": "hyperbridge-marketplace-protocol",
+    "name": "@hyperbridge/marketplace-protocol",
     "version": "1.0.14",
     "description": "Hyperbridge Marketplace Protocol",
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "./index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",

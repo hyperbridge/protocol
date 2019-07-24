@@ -1,7 +1,10 @@
 {
-  "name": "hyperbridge-token",
+  "name": "@hyperbridge/token",
   "version": "1.0.14",
   "description": "Hyperbridge Token",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./index.js",
   "scripts": {
     "build-api": "rm -rf build && mkdir build && cp -R communication-api/ build/communication-api/ && ./node_modules/.bin/babel communication-api --out-dir build/communication-api",
