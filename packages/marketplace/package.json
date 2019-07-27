@@ -1,6 +1,6 @@
 {
     "name": "@hyperbridge/marketplace-protocol",
-    "version": "1.0.14",
+    "version": "1.0.15-alpha.0",
     "description": "Hyperbridge Marketplace Protocol",
     "publishConfig": {
         "access": "public"
