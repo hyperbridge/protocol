@@ -17,9 +17,9 @@
         "type": "git",
         "url": "git+https://github.com/hyperbridge/protocol.git"
     },
-    "license": "SEE LICENSE IN LICENSE.md",
+    "license": "Apache-2.0",
     "engines": {
-        "node": ">=8.11.1"
+        "node": ">=10"
     },
     "dependencies": {
         "fs-extra": "^7.0.0",
@@ -48,5 +48,5 @@
         "eslint-plugin-prettier": "^2.6.0",
         "prettier": "1.14.2"
     },
-    "gitHead": "4be1e6ef0c526b22935249623c0f2a8bca8472b6"
+    "gitHead": "3cb742034b4d95590df0f5f2deb0980e181d53e2"
 }

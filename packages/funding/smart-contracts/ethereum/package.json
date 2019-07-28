@@ -12,7 +12,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "dependencies": {
     "openzeppelin-solidity": "1.12.0"
   },

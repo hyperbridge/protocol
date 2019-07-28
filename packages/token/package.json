@@ -11,9 +11,9 @@
     "build": "cd smart-contracts/ethereum && ./node_modules/.bin/truffle compile && cd ../../ && npm i && npm run build-api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "Apache-2.0",
   "engines": {
-    "node": ">=8.11.1"
+    "node": ">=10"
   },
   "dependencies": {
     "truffle-contract": "^3.0.5"
@@ -39,5 +39,5 @@
     "chai-as-promised": "^7.1.1",
     "chai-bignumber": "^2.0.2"
   },
-  "gitHead": "4be1e6ef0c526b22935249623c0f2a8bca8472b6"
+  "gitHead": "3cb742034b4d95590df0f5f2deb0980e181d53e2"
 }
