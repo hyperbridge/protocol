@@ -1,6 +1,6 @@
 {
   "name": "@hyperbridge/funding-protocol",
-  "version": "1.0.16-alpha.0",
+  "version": "1.0.16",
   "description": "Hyperbridge Funding Protocol",
   "publishConfig": {
     "access": "public"
